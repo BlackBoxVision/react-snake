@@ -1,12 +1,17 @@
-import styled from 'styled-components';
+import React from 'react';
 
-const Box = styled.div`
-    width: ${props => props.width}px;
-    height: ${props => props.height}px;
-    background-color: ${props => props.color};
-    top: ${props => props.top}px;
-    left: ${props => props.left}px;
-    position: ${props => props.position};
-`;
+const Box = props =>
+    <div
+        style={{
+            top: `${props.top}px`,
+            left: `${props.left}px`,
+            position: props.position,
+            width: `${props.width}px`,
+            height: `${props.height}px`,
+            backgroundColor: props.color
+        }}
+    >
+        {props.children}
+    </div>;
 
 export default Box;

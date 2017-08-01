@@ -4,8 +4,7 @@
   "version": "0.0.7",
   "dependencies": {
     "react": "15.5.3",
-    "react-dom": "15.5.3",
-    "styled-components": "^2.1.1"
+    "react-dom": "15.5.3"
   },
   "devDependencies": {
     "prettier": "^1.5.3",
