@@ -8,7 +8,9 @@ const Box = props =>
             position: props.position,
             width: `${props.width}px`,
             height: `${props.height}px`,
-            backgroundColor: props.color
+            backgroundColor: props.color,
+            margin: 0,
+            padding: 0
         }}
     >
         {props.children}

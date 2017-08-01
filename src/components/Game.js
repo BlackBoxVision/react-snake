@@ -1,89 +1,134 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Box from './Box';
+import World from './entities/World';
+import Snake from './entities/Snake';
+import SnakeFood from './entities/SnakeFood';
+
+import Constants from '../utils/constants';
 
 
 export default class Game extends React.Component {
     state = {
-        initialLength: 0,
-        positions: [],
-        direction: {},
-        foodPosition: {
-            x: 0,
-            y: 0
+        snake: {
+            head: {
+                x: 0,
+                y: 0
+            },
+            tail: [],
+            tailLength: 0,
+            direction: {
+                x: 1,
+                y: 0
+            }
+        },
+        food: {
+            position: {
+                x: 0,
+                y: 0
+            }
         }
     };
 
-    tick = () => {
-        const x = Math.floor(Math.random() * 25);
-        const y = Math.floor(Math.random() * 25);
+    componentDidMount() {
+        window.addEventListener('keyup', this.handleKeyUp);
 
+        this.clearInterval = this.startLoop(this.tick);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keyup', this.handleKeyUp);
+
+        this.clearInterval();
+    }
+
+    render() {
+        const { food, snake } = this.state;
+
+        return (
+            <World
+                width={Constants.World.WIDTH}
+                height={Constants.World.HEIGHT}
+                xBlocks={Constants.World.X_BLOCK}
+                yBlocks={Constants.World.Y_BLOCK}
+                backgroundColor={Constants.World.BACKGROUND_COLOR}
+            >
+                <SnakeFood position={food.position} />
+                <Snake head={snake.head} tail={snake.tail} />
+            </World>
+        );
+    }
+
+    tick = () => {
         this.setState(state => ({
-            foodPosition: { x, y }
+            snake: {
+                ...state.snake,
+                head: this.calculateSnakePosition(state)
+            },
+            food: {
+                position: {
+                    x: Math.floor(Math.random() * Constants.World.X_BLOCK),
+                    y: Math.floor(Math.random() * Constants.World.Y_BLOCK)
+                }
+            }
         }));
     };
 
-    startLoop = (updaterFunc, millis = 1000) => {
+    startLoop = (updaterFunc, millis = 300) => {
         const intervalId = setInterval(updaterFunc, millis);
 
         return () => clearInterval(intervalId);
     };
 
-    componentDidMount() {
-        this.clearInterval = this.startLoop(this.tick);
-    }
+    handleKeyUp = event => {
+        const char = event.which || event.keyCode;
 
-    componentWillUnmount() {
-        this.clearInterval();
-    }
+        switch (char) {
+            case Constants.Direction.UP:
+                this.changeDirectionTo(0, -1);
+                break;
 
-    render() {
-        const { foodPosition: { x, y } } = this.state;
+            case Constants.Direction.DOWN:
+                this.changeDirectionTo(0, 1);
+                break;
 
-        return (
-            <BoardProvider width={625} height={625} xBlocks={25} yBlocks={25} backgroundColor="#414141">
-                <Box width={25} height={25} color="red" left={x * 25} top={y * 25} position="relative" />
-                <Box width={25} height={25} color="green" />
-            </BoardProvider>
-        );
-    }
-}
+            case Constants.Direction.RIGHT:
+                this.changeDirectionTo(1, 0);
+                break;
 
-class BoardProvider extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        xBlocks: PropTypes.number,
-        yBlocks: PropTypes.number,
-        backgroundColor: PropTypes.string
-    };
+            case Constants.Direction.LEFT:
+                this.changeDirectionTo(-1, 0);
+                break;
 
-    static contextTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        xBlocks: PropTypes.number,
-        yBlocks: PropTypes.number
-    };
-
-    constructor(props, context) {
-        super(props, context);
-    }
-
-    getContextTypes() {
-        return {
-            width: this.props.width,
-            height: this.props.height,
-            xBlocks: this.props.xBlocks,
-            yBlocks: this.props.yBlocks
+            default:
+                console.info('Unknown direction!');
+                break;
         }
-    }
+    };
 
-    render() {
-        return (
-            <Box width={this.props.width} height={this.props.height} color={this.props.backgroundColor}>
-                {this.props.children}
-            </Box>
-        )
+    changeDirectionTo = (x, y) =>
+        this.setState(state => ({
+            ...state,
+            snake: {
+                ...state.snake,
+                direction: {
+                    x: x,
+                    y: y
+                }
+            }
+        }));
+
+    calculateSnakePosition = (state) => {
+        let x = state.snake.head.x + state.snake.direction.x;
+        let y = state.snake.head.y + state.snake.direction.y;
+
+        x = x < 0 ? Constants.World.X_BLOCK - 1 : x;
+        x = x > Constants.World.X_BLOCK - 1 ? 0 : x;
+
+        y = y < 0 ? Constants.World.Y_BLOCK - 1 : y;
+        y = y > Constants.World.Y_BLOCK - 1 ? 0 : y;
+
+        return { x, y };
     }
 }
+
+
