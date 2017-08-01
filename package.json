@@ -1,0 +1,21 @@
+{
+  "name": "new",
+  "description": null,
+  "version": "0.0.7",
+  "dependencies": {
+    "react": "15.5.3",
+    "react-dom": "15.5.3",
+    "styled-components": "^2.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.5.3",
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --write 'src/**/*.js'"
+  }
+}
