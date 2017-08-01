@@ -2,6 +2,7 @@ import React from 'react';
 
 import Box from './Box';
 
+
 export default class Game extends React.Component {
     state = {
         initialLength: 0,
@@ -23,12 +24,18 @@ export default class Game extends React.Component {
         }));
     };
 
+    startLoop = (updaterFunc, millis = 500) => {
+        const intervalId = setInterval(updaterFunc, millis);
+
+        return () => clearInterval(intervalId);
+    };
+
     componentDidMount() {
-        this.intervalId = setInterval(this.tick, 1000);
+        this.clearInterval = this.startLoop(this.tick);
     }
 
     componentWillUnmount() {
-        clearInterval(this.intervalId);
+        this.clearInterval();
     }
 
     render() {
