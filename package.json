@@ -3,6 +3,7 @@
   "description": null,
   "version": "0.0.7",
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "15.5.3",
     "react-dom": "15.5.3"
   },
