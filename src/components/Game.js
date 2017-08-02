@@ -7,7 +7,7 @@ import SnakeFood from './entities/SnakeFood';
 import EventListener from './primitives/Listener';
 import Loop from './primitives/Loop';
 
-import Config from '../utils/constants';
+import Config from '../config';
 
 export default class Game extends React.Component {
     state = Config.InitialState;
@@ -17,7 +17,7 @@ export default class Game extends React.Component {
 
         return (
             <EventListener name="keyup" handler={this.handleKeyUp}>
-                <Loop tick={this.tick} loopDelay={150}>
+                <Loop tick={this.tick} loopDelay={400}>
                     <World config={Config.World}>
                         <Snake head={snake.head} tail={snake.tail} />
                         <SnakeFood position={food.position} />
@@ -28,65 +28,86 @@ export default class Game extends React.Component {
     }
 
     tick = _ => {
+        this.updateFoodPosition();
+        this.updateSnakePosition();
+    };
+
+    updateFoodPosition = _ => {
+        const { food, snake } = this.state;
+
+        if (food.position.x === snake.head.x && food.position.y === snake.head.y) {
+            const x = Math.floor(Math.random() * Config.World.xBlocks);
+            const y = Math.floor(Math.random() * Config.World.yBlocks);
+
+            this.setState(state => ({
+                ...state,
+                food: {
+                    position: { x, y }
+                }
+            }));
+        }
+    };
+
+    updateSnakePosition = () => {
+        const calcPosition = state => {
+            const X_BLOCKS = Config.World.xBlocks;
+            const Y_BLOCKS = Config.World.yBlocks;
+
+            let x = state.snake.head.x + state.snake.direction.x;
+            let y = state.snake.head.y + state.snake.direction.y;
+
+            x = x < 0 ? X_BLOCKS - 1 : x;
+            x = x > X_BLOCKS - 1 ? 0 : x;
+
+            y = y < 0 ? Y_BLOCKS - 1 : y;
+            y = y > Y_BLOCKS - 1 ? 0 : y;
+
+            return { x, y };
+        };
+
         this.setState(state => ({
             snake: {
                 ...state.snake,
-                head: this.calculateSnakePosition(state)
+                head: calcPosition(state)
             }
         }));
     };
 
     handleKeyUp = event => {
         const char = event.which || event.keyCode;
+        const changeDirectionTo = (x, y) =>
+            this.setState(state => ({
+                ...state,
+                snake: {
+                    ...state.snake,
+                    direction: {
+                        x: x,
+                        y: y
+                    }
+                }
+            }));
+
 
         switch (char) {
             case Config.Direction.UP:
-                this.changeDirectionTo(0, -1);
+                changeDirectionTo(0, -1);
                 break;
 
             case Config.Direction.DOWN:
-                this.changeDirectionTo(0, 1);
+                changeDirectionTo(0, 1);
                 break;
 
             case Config.Direction.RIGHT:
-                this.changeDirectionTo(1, 0);
+                changeDirectionTo(1, 0);
                 break;
 
             case Config.Direction.LEFT:
-                this.changeDirectionTo(-1, 0);
+                changeDirectionTo(-1, 0);
                 break;
 
             default:
                 console.info('Unknown direction!');
                 break;
         }
-    };
-
-    changeDirectionTo = (x, y) =>
-        this.setState(state => ({
-            ...state,
-            snake: {
-                ...state.snake,
-                direction: {
-                    x: x,
-                    y: y
-                }
-            }
-        }));
-
-    calculateSnakePosition = state => {
-        const X_BLOCKS = Config.World.xBlocks;
-        const Y_BLOCKS = Config.World.yBlocks;
-
-        let x = state.snake.head.x + state.snake.direction.x;
-        let y = state.snake.head.y + state.snake.direction.y;
-
-        x = x < 0 ? X_BLOCKS - 1 : x;
-        x = x > X_BLOCKS - 1 ? 0 : x;
-
-        y = y < 0 ? Y_BLOCKS - 1 : y;
-        y = y > Y_BLOCKS - 1 ? 0 : y;
-
-        return { x, y };
     };
 }
