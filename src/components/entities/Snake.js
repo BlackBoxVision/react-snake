@@ -7,6 +7,7 @@ export default class Snake extends React.Component {
         return (
             <div>
                 <Pixel color="green" position={this.props.head} />
+                {this.props.tail.map(it => <Pixel color="green" position={it}/>)}
             </div>
         );
     }
