@@ -4,98 +4,55 @@ import World from './entities/World';
 import Snake from './entities/Snake';
 import SnakeFood from './entities/SnakeFood';
 
-import Constants from '../utils/constants';
+import EventListener from './primitives/Listener';
+import Loop from './primitives/Loop';
 
+import Config from '../utils/constants';
 
 export default class Game extends React.Component {
-    state = {
-        snake: {
-            head: {
-                x: 0,
-                y: 0
-            },
-            tail: [],
-            tailLength: 0,
-            direction: {
-                x: 1,
-                y: 0
-            }
-        },
-        food: {
-            position: {
-                x: 0,
-                y: 0
-            }
-        }
-    };
-
-    componentDidMount() {
-        window.addEventListener('keyup', this.handleKeyUp);
-
-        this.clearInterval = this.startLoop(this.tick);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keyup', this.handleKeyUp);
-
-        this.clearInterval();
-    }
+    state = Config.InitialState;
 
     render() {
         const { food, snake } = this.state;
 
         return (
-            <World
-                width={Constants.World.WIDTH}
-                height={Constants.World.HEIGHT}
-                xBlocks={Constants.World.X_BLOCK}
-                yBlocks={Constants.World.Y_BLOCK}
-                backgroundColor={Constants.World.BACKGROUND_COLOR}
-            >
-                <SnakeFood position={food.position} />
-                <Snake head={snake.head} tail={snake.tail} />
-            </World>
+            <EventListener name="keyup" handler={this.handleKeyUp}>
+                <Loop tick={this.tick} loopDelay={150}>
+                    <World config={Config.World}>
+                        <Snake head={snake.head} tail={snake.tail} />
+                        <SnakeFood position={food.position} />
+                    </World>
+                </Loop>
+            </EventListener>
         );
     }
 
-    tick = () => {
+    tick = _ => {
         this.setState(state => ({
             snake: {
                 ...state.snake,
                 head: this.calculateSnakePosition(state)
-            },
-            food: {
-                position: {
-                    x: Math.floor(Math.random() * Constants.World.X_BLOCK),
-                    y: Math.floor(Math.random() * Constants.World.Y_BLOCK)
-                }
             }
         }));
-    };
-
-    startLoop = (updaterFunc, millis = 300) => {
-        const intervalId = setInterval(updaterFunc, millis);
-
-        return () => clearInterval(intervalId);
     };
 
     handleKeyUp = event => {
         const char = event.which || event.keyCode;
 
         switch (char) {
-            case Constants.Direction.UP:
+            case Config.Direction.UP:
                 this.changeDirectionTo(0, -1);
                 break;
 
-            case Constants.Direction.DOWN:
+            case Config.Direction.DOWN:
                 this.changeDirectionTo(0, 1);
                 break;
 
-            case Constants.Direction.RIGHT:
+            case Config.Direction.RIGHT:
                 this.changeDirectionTo(1, 0);
                 break;
 
-            case Constants.Direction.LEFT:
+            case Config.Direction.LEFT:
                 this.changeDirectionTo(-1, 0);
                 break;
 
@@ -117,18 +74,19 @@ export default class Game extends React.Component {
             }
         }));
 
-    calculateSnakePosition = (state) => {
+    calculateSnakePosition = state => {
+        const X_BLOCKS = Config.World.xBlocks;
+        const Y_BLOCKS = Config.World.yBlocks;
+
         let x = state.snake.head.x + state.snake.direction.x;
         let y = state.snake.head.y + state.snake.direction.y;
 
-        x = x < 0 ? Constants.World.X_BLOCK - 1 : x;
-        x = x > Constants.World.X_BLOCK - 1 ? 0 : x;
+        x = x < 0 ? X_BLOCKS - 1 : x;
+        x = x > X_BLOCKS - 1 ? 0 : x;
 
-        y = y < 0 ? Constants.World.Y_BLOCK - 1 : y;
-        y = y > Constants.World.Y_BLOCK - 1 ? 0 : y;
+        y = y < 0 ? Y_BLOCKS - 1 : y;
+        y = y > Y_BLOCKS - 1 ? 0 : y;
 
         return { x, y };
-    }
+    };
 }
-
-

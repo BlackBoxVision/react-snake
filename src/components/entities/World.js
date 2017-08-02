@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import Box from '../primitives/Box';
 
-export default class BoardProvider extends React.Component {
+export default class World extends React.Component {
     static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        xBlocks: PropTypes.number,
-        yBlocks: PropTypes.number,
-        backgroundColor: PropTypes.string
+        config: PropTypes.shape({
+            width: PropTypes.number,
+            height: PropTypes.number,
+            xBlocks: PropTypes.number,
+            yBlocks: PropTypes.number,
+            background: PropTypes.string
+        })
     };
 
     static childContextTypes = {
@@ -21,16 +23,16 @@ export default class BoardProvider extends React.Component {
 
     getChildContext() {
         return {
-            width: this.props.width,
-            height: this.props.height,
-            xBlocks: this.props.xBlocks,
-            yBlocks: this.props.yBlocks
+            width: this.props.config.width,
+            height: this.props.config.height,
+            xBlocks: this.props.config.xBlocks,
+            yBlocks: this.props.config.yBlocks
         };
     }
 
     render() {
         return (
-            <Box width={this.props.width} height={this.props.height} color={this.props.backgroundColor}>
+            <Box width={this.props.config.width} height={this.props.config.height} color={this.props.config.background}>
                 {this.props.children}
             </Box>
         );
