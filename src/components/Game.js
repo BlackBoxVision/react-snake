@@ -8,7 +8,7 @@ import EventListener from './primitives/Listener';
 import Loop from './primitives/Loop';
 
 import Config from '../config';
-import GameLogic from "../logic/index";
+import GameLogic from '../logic/index';
 
 export default class Game extends React.Component {
     state = Config.InitialState;
@@ -64,7 +64,7 @@ export default class Game extends React.Component {
         }
     };
 
-    changeDirectionTo = (x, y) => (state) => ({
+    changeDirectionTo = (x, y) => state => ({
         ...state,
         snake: {
             ...state.snake,

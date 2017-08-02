@@ -32,7 +32,12 @@ export default class World extends React.Component {
 
     render() {
         return (
-            <Box width={this.props.config.width} height={this.props.config.height} color={this.props.config.background} position="relative">
+            <Box
+                width={this.props.config.width}
+                height={this.props.config.height}
+                color={this.props.config.background}
+                position="relative"
+            >
                 {this.props.children}
             </Box>
         );
