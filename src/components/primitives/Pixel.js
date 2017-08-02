@@ -19,7 +19,7 @@ export default class Pixel extends React.Component {
         const y = this.props.position.y * this.context.yBlocks;
 
         return (
-            <Box position="relative" width={pixelWidth} height={pixelHeight} color={this.props.color} left={x} top={y}>
+            <Box position="absolute" width={pixelWidth} height={pixelHeight} color={this.props.color} left={x} top={y}>
                 {this.props.children}
             </Box>
         );
