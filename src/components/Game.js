@@ -40,19 +40,15 @@ export default class Game extends React.Component {
 
         switch (char) {
             case Config.Direction.UP:
-                updater = this.changeDirectionTo(0, -1);
-                break;
-
             case Config.Direction.DOWN:
-                updater = this.changeDirectionTo(0, 1);
-                break;
-
-            case Config.Direction.RIGHT:
-                updater = this.changeDirectionTo(1, 0);
+                const y = char === Config.Direction.UP ? -1 : 1;
+                updater = this.changeDirectionTo(0, y);
                 break;
 
             case Config.Direction.LEFT:
-                updater = this.changeDirectionTo(-1, 0);
+            case Config.Direction.RIGHT:
+                const x = char === Config.Direction.LEFT ? -1 : 1;
+                updater = this.changeDirectionTo(x, 0);
                 break;
 
             default:
