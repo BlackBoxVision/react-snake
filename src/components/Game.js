@@ -17,7 +17,7 @@ export default class Game extends React.Component {
 
         return (
             <EventListener name="keyup" handler={this.handleKeyUp}>
-                <Loop tick={this.tick} loopDelay={400}>
+                <Loop tick={this.tick} delay={400}>
                     <World config={Config.World}>
                         <Snake head={snake.head} tail={snake.tail} />
                         <SnakeFood position={food.position} />

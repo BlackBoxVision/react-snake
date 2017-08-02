@@ -5,11 +5,11 @@ export default class Loop extends React.Component {
     static propTypes = {
         children: PropTypes.any,
         tick: PropTypes.func.isRequired,
-        loopDelay: PropTypes.number.isRequired
+        delay: PropTypes.number.isRequired
     };
 
     componentWillMount() {
-        this.clearInterval = this.startLoop(this.props.tick, this.props.loopDelay);
+        this.clearInterval = this.startLoop(this.props.tick, this.props.delay);
     }
 
     componentWillUnmount() {
