@@ -6,13 +6,10 @@ import Pixel from '../primitives/Pixel';
 export default class Snake extends React.Component {
     static propTypes = {
         head: PropTypes.shape({
-            x: PropTypes.number.isRequired,
-            y: PropTypes.number.isRequired
-        }),
-        tail: PropTypes.arrayOf({
-            x: PropTypes.number.isRequired,
-            y: PropTypes.number.isRequired
-        })
+            x: PropTypes.number,
+            y: PropTypes.number
+        }).isRequired,
+        tail: PropTypes.array.isRequired
     };
 
     render() {

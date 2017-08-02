@@ -28,10 +28,11 @@ export default class Game extends React.Component {
         );
     }
 
-    tick = () => {
-        this.setState(GameLogic.updateFood);
-        this.setState(GameLogic.updateSnake);
-    };
+    tick = () => this.setState(state => ({
+        ...GameLogic.updateFood(state),
+        ...GameLogic.updateSnake(state)
+    }));
+
 
     handleKeyUp = event => {
         const char = event.which || event.keyCode;
