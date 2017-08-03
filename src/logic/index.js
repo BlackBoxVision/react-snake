@@ -28,7 +28,7 @@ export default class GameLogic {
                     ...currentState.snake,
                     tailLength: foodState.snake.tailLength,
                     head: snakeState.snake.head,
-                    tail: [...foodState.snake.tail, ...snakeState.snake.tail]
+                    tail: foodState.snake.tail
                 }
             };
         }

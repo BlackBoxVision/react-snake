@@ -20,7 +20,15 @@ export default class Snake extends React.Component {
         return (
             <div>
                 <Pixel zIndex={100} color="green" position={head} image={`url(${SnakeSkin})`} />
-                {tail.map(it => <Pixel zIndex={100} color="green" position={it} image={`url(${SnakeSkin})`} />)}
+                {tail.map((it, index) =>
+                    <Pixel
+                        key={`snake-tail-${index}`}
+                        zIndex={100}
+                        color="green"
+                        position={it}
+                        image={`url(${SnakeSkin})`}
+                    />
+                )}
             </div>
         );
     }
