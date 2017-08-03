@@ -36,6 +36,8 @@ export default class World extends React.Component {
                 width={this.props.config.width}
                 height={this.props.config.height}
                 color={this.props.config.background}
+                image={this.props.config.image}
+                size={this.props.config.size}
                 position="relative"
             >
                 {this.props.children}

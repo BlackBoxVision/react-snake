@@ -4,6 +4,16 @@ import PropTypes from 'prop-types';
 import Box from './Box';
 
 export default class Pixel extends React.Component {
+    static propTypes = {
+        zIndex: PropTypes.number,
+        image: PropTypes.string,
+        color: PropTypes.string.isRequired,
+        position: PropTypes.shape({
+            x: PropTypes.number.isRequired,
+            y: PropTypes.number.isRequired
+        })
+    };
+
     static contextTypes = {
         width: PropTypes.number,
         height: PropTypes.number,
@@ -19,7 +29,17 @@ export default class Pixel extends React.Component {
         const y = this.props.position.y * this.context.yBlocks;
 
         return (
-            <Box position="absolute" width={pixelWidth} height={pixelHeight} color={this.props.color} left={x} top={y}>
+            <Box
+                size={`${pixelWidth}px ${pixelHeight}px`}
+                image={this.props.image}
+                color={this.props.color}
+                position="absolute"
+                height={pixelHeight}
+                width={pixelWidth}
+                left={x}
+                top={y}
+                zIndex={this.props.zIndex}
+            >
                 {this.props.children}
             </Box>
         );

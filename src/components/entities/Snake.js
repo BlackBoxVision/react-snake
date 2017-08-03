@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SnakeSkin from '../../images/snake/skin1.jpg';
+
 import Pixel from '../primitives/Pixel';
 
 export default class Snake extends React.Component {
@@ -17,7 +19,7 @@ export default class Snake extends React.Component {
 
         return (
             <div>
-                <Pixel color="green" position={head} />
+                <Pixel zIndex={100} color="green" position={head} image={`url(${SnakeSkin})`}/>
                 {tail.map(it => <Pixel color="green" position={it} />)}
             </div>
         );

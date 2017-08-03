@@ -18,7 +18,7 @@ export default class Game extends React.Component {
 
         return (
             <EventListener name="keyup" handler={this.handleKeyUp}>
-                <Loop tick={this.tick} delay={400}>
+                <Loop tick={this.tick} delay={250}>
                     <World config={Config.World}>
                         <Snake head={snake.head} tail={snake.tail} />
                         <SnakeFood position={food.position} />
@@ -28,11 +28,11 @@ export default class Game extends React.Component {
         );
     }
 
-    tick = () => this.setState(state => ({
-        ...GameLogic.updateFood(state),
-        ...GameLogic.updateSnake(state)
-    }));
-
+    tick = () =>
+        this.setState(state => ({
+            ...GameLogic.updateFood(state),
+            ...GameLogic.updateSnake(state)
+        }));
 
     handleKeyUp = event => {
         const char = event.which || event.keyCode;

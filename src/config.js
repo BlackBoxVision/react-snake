@@ -1,10 +1,14 @@
+import GrassSkin from './images/grass/skin0.jpg';
+
 export default {
     World: {
         width: 625,
         height: 625,
         xBlocks: 25,
         yBlocks: 25,
-        background: '#414141'
+        background: '#414141',
+        image: `url(${GrassSkin})`,
+        size: '25px 25px'
     },
     Direction: {
         UP: 38,
