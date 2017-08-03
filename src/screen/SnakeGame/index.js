@@ -13,26 +13,8 @@ import Loop from './components/primitives/Loop';
 import Config from '../../config';
 import GameLogic from '../../logic/index';
 
-const Container = props =>
-    <div style={{ backgroundColor: props.backgroundColor, height: props.height, width: props.width }}>
-        {props.children}
-    </div>;
-
-const Flex = props =>
-    <div
-        style={{
-            backgroundColor: props.backgroundColor,
-            justifyContent: 'center',
-            flexDirection: 'column',
-            alignItems: 'center',
-            display: 'flex',
-            height: props.height,
-            width: props.width
-        }}
-    >
-        {props.children}
-    </div>;
-
+import Flex from '../../components/Flex';
+import Container from '../../components/Container';
 
 export default class Game extends React.Component {
     state = Config.InitialState;

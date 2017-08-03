@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Flex = ({ style = {}, children }) =>
+const Flex = props =>
     <div
         style={{
-            ...style,
-            backgroundColor: '#414141',
+            backgroundColor: props.backgroundColor,
             justifyContent: 'center',
             flexDirection: 'column',
             alignItems: 'center',
             display: 'flex',
-            height: '100vh',
-            width: '100vw'
+            height: props.height,
+            width: props.width
         }}
     >
-        {children}
+        {props.children}
     </div>;
 
 Flex.propTypes = {
-    style: PropTypes.object,
+    backgroundColor: PropTypes.string,
+    height: PropTypes.string,
+    width: PropTypes.string,
     children: PropTypes.any
 };
 
