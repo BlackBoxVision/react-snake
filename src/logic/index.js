@@ -5,10 +5,6 @@ export default class GameLogic {
         const foodState = GameLogic._updateFood(currentState);
         const snakeState = GameLogic._updateSnake(currentState);
 
-        //TODO remove when everything is fixed...
-        console.info('foodState', JSON.stringify(foodState, null, 2));
-        console.info('snakeState', JSON.stringify(snakeState, null, 2));
-
         if (foodState === currentState) {
             //Food wasn't touched yet!
             return {
