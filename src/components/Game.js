@@ -36,7 +36,7 @@ export default class Game extends React.Component {
                                         <SnakeFood position={food.position} />
                                     </World>
                                 </Loop>
-                                <p style={{fontSize: 17}}>
+                                <p style={{ fontSize: 17 }}>
                                     Length: {this.state.snake.tailLength}
                                 </p>
                             </CardText>
@@ -47,11 +47,7 @@ export default class Game extends React.Component {
         );
     }
 
-    tick = () =>
-        this.setState(state => ({
-            ...GameLogic.updateSnake(state),
-            ...GameLogic.updateFood(state)
-        }));
+    tick = () => this.setState(currentState => GameLogic.update(currentState));
 
     handleKeyUp = event => {
         const char = event.which || event.keyCode;
