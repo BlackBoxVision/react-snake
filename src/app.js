@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -11,9 +11,9 @@ import Splash from './screen/Splash';
 export default () =>
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <BrowserRouter>
-            <div>
+            <Switch>
                 <Route path="/" component={Splash} exact />
                 <Route path="/game" component={SnakeGame} exact />
-            </div>
+            </Switch>
         </BrowserRouter>
     </MuiThemeProvider>;
