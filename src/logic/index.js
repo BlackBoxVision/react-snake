@@ -39,7 +39,7 @@ export default class GameLogic {
             do {
               newX = Math.floor(Math.random() * Config.World.xBlocks);
               newY = Math.floor(Math.random() * Config.World.yBlocks);
-            } while( snake.tail.filter( item => item.x === newX && item.y === newY ).lenght > 0 );
+            } while( snake.tail.filter( item => item.x === newX && item.y === newY ).lenght > 0  || ( snake.head.x === newX && snake.head.y === newY) );
             const newTailLength = snake.tailLength + 1;
 
             return {
