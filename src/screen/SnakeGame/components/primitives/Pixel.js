@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Box from './Box';
 
-export default class Pixel extends React.Component {
+export default class Pixel extends React.PureComponent {
     static propTypes = {
         size: PropTypes.string,
         margin: PropTypes.number,
@@ -23,6 +23,14 @@ export default class Pixel extends React.Component {
         xBlocks: PropTypes.number,
         yBlocks: PropTypes.number
     };
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.position !== nextProps.position) {
+            return true;
+        }
+
+        return false;
+    }
 
     render() {
         const pixelWidth = Math.floor(this.context.width / this.context.xBlocks);

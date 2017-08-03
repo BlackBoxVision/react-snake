@@ -1,5 +1,6 @@
 import React from 'react';
 
+import pure from 'recompose/pure';
 import Card from 'material-ui/Card/Card';
 import CardText from 'material-ui/Card/CardText';
 
@@ -16,7 +17,7 @@ import GameLogic from '../../logic/index';
 import Flex from '../../components/Flex';
 import Container from '../../components/Container';
 
-export default class Game extends React.Component {
+class Game extends React.Component {
     state = Config.InitialState;
 
     render() {
@@ -87,3 +88,5 @@ export default class Game extends React.Component {
         }
     });
 }
+
+export default pure(Game);

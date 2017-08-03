@@ -5,14 +5,22 @@ import SnakeSkin from '../../../../images/snake/skin1.jpg';
 
 import Pixel from '../primitives/Pixel';
 
-export default class Snake extends React.Component {
+export default class Snake extends React.PureComponent {
     static propTypes = {
         head: PropTypes.shape({
             x: PropTypes.number,
             y: PropTypes.number
-        }).isRequired,
-        tail: PropTypes.array.isRequired
+        }),
+        tail: PropTypes.array
     };
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.head !== nextProps.head || this.props.tail.length !== nextProps.tail.length) {
+            return true;
+        }
+
+        return false;
+    }
 
     render() {
         const { head, tail } = this.props;

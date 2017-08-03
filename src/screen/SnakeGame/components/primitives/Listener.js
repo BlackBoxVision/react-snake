@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class EventListener extends React.Component {
+export default class EventListener extends React.PureComponent {
     static propTypes = {
         name: PropTypes.string.isRequired,
         handler: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Box from '../primitives/Box';
 
-export default class World extends React.Component {
+export default class World extends React.PureComponent {
     static propTypes = {
         config: PropTypes.shape({
             width: PropTypes.number,
