@@ -4,7 +4,7 @@ export default {
         height: 625,
         xBlocks: 25,
         yBlocks: 25,
-        background: '#C8E6C9'
+        background: '#69F0AE'
     },
     Direction: {
         UP: 38,

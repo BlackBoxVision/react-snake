@@ -29,7 +29,7 @@ export default class Game extends React.Component {
                         <Card>
                             <Container backgroundColor="#388E3C" height="100vh" width="45.5vw">
                                 <CardText>
-                                    <Loop tick={this.tick} delay={250}>
+                                    <Loop tick={this.tick} delay={150}>
                                         <World config={Config.World}>
                                             <Snake head={snake.head} tail={snake.tail} />
                                             <SnakeFood position={food.position} />
