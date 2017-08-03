@@ -31,29 +31,22 @@ export default class GameLogic {
     }
 
     static _updateFood(currentState) {
-        const { food, snake } = currentState;
+        const { food: { position }, snake: { head, tail, tailLength } } = currentState;
 
-        if (food.position.x === snake.head.x && food.position.y === snake.head.y) {
-          let newX;
-          let newY;
-          do {
-            newX = Math.floor(Math.random() * Config.World.xBlocks);
-            newY = Math.floor(Math.random() * Config.World.yBlocks);
-          } while( snake.tail.filter( item => item.x === newX && item.y === newY ).lenght > 0  || ( snake.head.x === newX && snake.head.y === newY) );
-          const newTailLength = snake.tailLength + 1;
+        if (position.x === head.x && position.y === head.y) {
+            const newTail = [head, ...tail];
+            const newTailLength = tailLength + 1;
+            const newPosition = GameLogic._recomputeFood(currentState);
 
-          return {
-              food: {
-                  position: {
-                      x: newX,
-                      y: newY
-                  }
-              },
-              snake: {
-                  tailLength: newTailLength,
-                  tail: [currentState.snake.head, ...currentState.snake.tail]
-              }
-          };
+            return {
+                food: {
+                    position: newPosition
+                },
+                snake: {
+                    tail: newTail,
+                    tailLength: newTailLength
+                }
+            };
         }
         return currentState;
     }
@@ -70,24 +63,47 @@ export default class GameLogic {
         };
     }
 
+    static _recomputeFood(currentState) {
+        const { snake: { head, tail } } = currentState;
+
+        const hasCollisions = (newX, newY) =>
+            tail.filter(({ x, y }) => x === newX && y === newY).length > 0 || (head.x === newX && head.y === newY);
+
+        let newX;
+        let newY;
+
+        do {
+            newX = Math.floor(Math.random() * Config.World.xBlocks);
+            newY = Math.floor(Math.random() * Config.World.yBlocks);
+        } while (hasCollisions(newX, newY));
+
+        return {
+            x: newX,
+            y: newY
+        };
+    }
+
     static _recomputeHead(currentState) {
-        const X_BLOCKS = Config.World.xBlocks;
-        const Y_BLOCKS = Config.World.yBlocks;
+        const { snake: { head, direction } } = currentState;
 
-        let x = currentState.snake.head.x + currentState.snake.direction.x;
-        let y = currentState.snake.head.y + currentState.snake.direction.y;
+        let newX = head.x + direction.x;
+        let newY = head.y + direction.y;
 
-        x = x < 0 ? X_BLOCKS - 1 : x;
-        x = x > X_BLOCKS - 1 ? 0 : x;
+        newX = newX < 0 ? Config.World.xBlocks - 1 : newX;
+        newX = newX > Config.World.xBlocks - 1 ? 0 : newX;
 
-        y = y < 0 ? Y_BLOCKS - 1 : y;
-        y = y > Y_BLOCKS - 1 ? 0 : y;
+        newY = newY < 0 ? Config.World.yBlocks - 1 : newY;
+        newY = newY > Config.World.yBlocks - 1 ? 0 : newY;
 
-        return { x, y };
+        return {
+            x: newX,
+            y: newY
+        };
     }
 
     static _recomputeTail(currentState) {
         const { snake: { head, tail } } = currentState;
+
         return tail.map((item, index) => (index === 0 ? head : tail[index - 1]));
     }
 }
