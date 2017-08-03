@@ -12,10 +12,9 @@ const Box = props =>
             backgroundColor: props.color,
             backgroundImage: props.image,
             backgroundSize: props.size,
-            backgroundRepeat: 'repeat',
             zIndex: props.zIndex,
-            margin: 0,
-            padding: 0
+            margin: props.margin,
+            padding: props.padding
         }}
     >
         {props.children}
@@ -30,7 +29,9 @@ Box.propTypes = {
     color: PropTypes.string,
     image: PropTypes.string,
     size: PropTypes.string,
-    zIndex: PropTypes.number
+    zIndex: PropTypes.number,
+    padding: PropTypes.number,
+    margin: PropTypes.number
 };
 
 export default Box;

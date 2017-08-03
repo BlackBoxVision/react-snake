@@ -5,6 +5,9 @@ import Box from './Box';
 
 export default class Pixel extends React.Component {
     static propTypes = {
+        size: PropTypes.string,
+        margin: PropTypes.number,
+        padding: PropTypes.number,
         zIndex: PropTypes.number,
         image: PropTypes.string,
         color: PropTypes.string.isRequired,
@@ -30,7 +33,7 @@ export default class Pixel extends React.Component {
 
         return (
             <Box
-                size={`${pixelWidth}px ${pixelHeight}px`}
+                size={this.props.size}
                 image={this.props.image}
                 color={this.props.color}
                 position="absolute"
@@ -39,6 +42,8 @@ export default class Pixel extends React.Component {
                 left={x}
                 top={y}
                 zIndex={this.props.zIndex}
+                padding={this.props.padding}
+                margin={this.props.margin}
             >
                 {this.props.children}
             </Box>

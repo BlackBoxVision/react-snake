@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import SnakeGame from './components/Game';
+import App from './app';
 
-ReactDOM.render(<SnakeGame />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
