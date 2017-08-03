@@ -17,6 +17,7 @@ export default {
         RIGHT: 39
     },
     InitialState: {
+        score: 0,
         snake: {
             head: {
                 x: 0,
