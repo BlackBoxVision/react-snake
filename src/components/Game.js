@@ -30,8 +30,8 @@ export default class Game extends React.Component {
 
     tick = () =>
         this.setState(state => ({
-            ...GameLogic.updateFood(state),
-            ...GameLogic.updateSnake(state)
+            ...GameLogic.updateSnake(state),
+            ...GameLogic.updateFood(state)
         }));
 
     handleKeyUp = event => {

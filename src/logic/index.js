@@ -7,7 +7,7 @@ export default class GameLogic {
         if (food.position.x === snake.head.x && food.position.y === snake.head.y) {
             const x = Math.floor(Math.random() * Config.World.xBlocks);
             const y = Math.floor(Math.random() * Config.World.yBlocks);
-
+            const newTailLenght =  snake.tailLength + 1;
             return {
                 ...currentState,
                 food: {
@@ -15,10 +15,14 @@ export default class GameLogic {
                         x: x,
                         y: y
                     }
+                },
+                snake: {
+                  ...currentState.snake,
+                  tailLength: newTailLenght,
+                  //tail: [currentState.snake.head, ...currentState.snake.tail]
                 }
             };
-        }
-
+        }        
         return currentState;
     }
 
@@ -39,10 +43,21 @@ export default class GameLogic {
             return { x, y };
         };
 
+        //console.log(JSON.stringify(currentState));
+
+        const reorderTail = state => {
+          const { head, tail } = state.snake;
+          return tail.map( (item, index) => {
+            return index === 0? head : tail[index-1];
+          });
+        };
+
+
         return {
             snake: {
                 ...currentState.snake,
-                head: calcPosition(currentState)
+                head: calcPosition(currentState),
+                tail: reorderTail(currentState)
             }
         };
     }
