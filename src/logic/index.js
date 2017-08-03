@@ -36,24 +36,24 @@ export default class GameLogic {
         if (food.position.x === snake.head.x && food.position.y === snake.head.y) {
           let newX;
           let newY;
-            do {
-              newX = Math.floor(Math.random() * Config.World.xBlocks);
-              newY = Math.floor(Math.random() * Config.World.yBlocks);
-            } while( snake.tail.filter( item => item.x === newX && item.y === newY ).lenght > 0  || ( snake.head.x === newX && snake.head.y === newY) );
-            const newTailLength = snake.tailLength + 1;
+          do {
+            newX = Math.floor(Math.random() * Config.World.xBlocks);
+            newY = Math.floor(Math.random() * Config.World.yBlocks);
+          } while( snake.tail.filter( item => item.x === newX && item.y === newY ).lenght > 0  || ( snake.head.x === newX && snake.head.y === newY) );
+          const newTailLength = snake.tailLength + 1;
 
-            return {
-                food: {
-                    position: {
-                        x: newX,
-                        y: newY
-                    }
-                },
-                snake: {
-                    tailLength: newTailLength,
-                    tail: [currentState.snake.head, ...currentState.snake.tail]
-                }
-            };
+          return {
+              food: {
+                  position: {
+                      x: newX,
+                      y: newY
+                  }
+              },
+              snake: {
+                  tailLength: newTailLength,
+                  tail: [currentState.snake.head, ...currentState.snake.tail]
+              }
+          };
         }
         return currentState;
     }
