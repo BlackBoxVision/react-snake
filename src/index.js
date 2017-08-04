@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { whyDidYouUpdate } from 'why-did-you-update';
 
-import App from './app';
+import App from './app/app';
 
 if (process.env.NODE_ENV !== 'production') {
     whyDidYouUpdate(React);

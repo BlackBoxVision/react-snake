@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SnakeSkin from '../../../../images/snake/skin1.jpg';
+import SnakeSkin from '../../../../../static/images/snake/skin1.jpg';
 
 import Pixel from '../primitives/Pixel';
 

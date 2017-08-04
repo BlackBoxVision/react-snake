@@ -5,8 +5,8 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import SnakeGame from './screen/SnakeGame';
-import Splash from './screen/Splash';
+import SnakeGame from './screen/SnakeGame/index';
+import Splash from './screen/Splash/index';
 
 export default () =>
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
