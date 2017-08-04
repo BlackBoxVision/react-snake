@@ -53,18 +53,15 @@ export default class GameLogic {
         return currentState;
     }
 
-    static _updateSnake(currentState) {
+    static updateSnake(currentState) {
         const newHead = GameLogic._recomputeHead(currentState);
         const newTail = GameLogic._recomputeTail(currentState);
 
         const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
 
         return {
-            gameOver: !!isHeadInTail,
-            snake: {
-                head: newHead,
-                tail: newTail
-            }
+            head: newHead,
+            tail: newTail
         };
     }
 
@@ -89,7 +86,7 @@ export default class GameLogic {
     }
 
     static _recomputeHead(currentState) {
-        const { snake: { head, direction } } = currentState;
+        const { head, direction } = currentState;
 
         let newX = head.x + direction.x;
         let newY = head.y + direction.y;
@@ -107,7 +104,7 @@ export default class GameLogic {
     }
 
     static _recomputeTail(currentState) {
-        const { snake: { head, tail } } = currentState;
+        const { head, tail } = currentState;
 
         return tail.map((item, index) => (index === 0 ? head : tail[index - 1]));
     }

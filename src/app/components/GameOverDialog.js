@@ -18,9 +18,7 @@ export default class GameOverDialog extends React.Component {
 
         return (
             <Dialog title="Game Over" actions={actions} open={this.props.open}>
-                <p>
-                    Ups, you have loose!
-                </p>
+                <p>Ups, you have loose!</p>
             </Dialog>
         );
     }
@@ -33,7 +31,8 @@ export default class GameOverDialog extends React.Component {
         this.closeDialog();
     };
 
-    closeDialog = () => this.setState(state => ({
-        open: !state.open
-    }));
+    closeDialog = () =>
+        this.setState(state => ({
+            open: !state.open
+        }));
 }

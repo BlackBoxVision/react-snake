@@ -23,7 +23,12 @@ export default class Splash extends React.Component {
                 <Flex backgroundColor="transparent" height="100vh" width="100vw">
                     <Card>
                         <Container backgroundColor="#388E3C" height="100vh" width="45.5vw">
-                            <img src={AppLogo} alt="game logo" width="85%" style={{ paddingTop: 50, paddingLeft: 50, paddingRight: 50 }}/>
+                            <img
+                                src={AppLogo}
+                                alt="game logo"
+                                width="85%"
+                                style={{ paddingTop: 50, paddingLeft: 50, paddingRight: 50 }}
+                            />
                             <CardText>
                                 <Container margin="75px" padding="10px 0px 0px 0px">
                                     <Container margin="10px 0px 0px 0px">

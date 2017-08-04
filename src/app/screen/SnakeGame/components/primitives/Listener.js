@@ -5,7 +5,7 @@ export default class EventListener extends React.PureComponent {
     static propTypes = {
         name: PropTypes.string.isRequired,
         handler: PropTypes.func.isRequired,
-        children: PropTypes.any
+        children: PropTypes.array
     };
 
     componentWillMount() {
