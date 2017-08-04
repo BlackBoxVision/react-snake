@@ -16,21 +16,23 @@ import GameLogic from '../../logic/index';
 
 import Flex from '../../components/Flex';
 import Container from '../../components/Container';
+import GameOverDialog from '../../components/GameOverDialog';
 
 class Game extends React.Component {
     state = Config.InitialState;
 
     render() {
-        const { food, snake } = this.state;
+        const { food, snake, gameOver } = this.state;
 
         return (
             <EventListener name="keyup" handler={this.handleKeyUp}>
                 <Container backgroundColor="#FFE082" height="100vh" width="100vw">
                     <Flex backgroundColor="transparent" height="100vh" width="100vw">
+                        <GameOverDialog onRestart={this.restart} open={gameOver}/>
                         <Card>
                             <Container backgroundColor="#388E3C" height="100vh" width="45.5vw">
                                 <CardText>
-                                    <Loop tick={this.tick} delay={150}>
+                                    <Loop tick={this.tick} delay={75} shouldStop={gameOver}>
                                         <World config={Config.World}>
                                             <Snake head={snake.head} tail={snake.tail} />
                                             <SnakeFood position={food.position} />
@@ -49,6 +51,8 @@ class Game extends React.Component {
     }
 
     tick = () => this.setState(currentState => GameLogic.update(currentState));
+
+    restart = () => this.setState(currentState => Config.InitialState);
 
     handleKeyUp = event => {
         const char = event.which || event.keyCode;

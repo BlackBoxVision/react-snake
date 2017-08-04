@@ -1,22 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import withAnimationFrame from 'react-animation-frame';
-
-class Loop extends React.PureComponent {
+export default class Loop extends React.Component {
     static propTypes = {
         children: PropTypes.any,
         tick: PropTypes.func.isRequired,
-        delay: PropTypes.number.isRequired
+        delay: PropTypes.number.isRequired,
+        shouldStop: PropTypes.bool.isRequired
     };
 
-    onAnimationFrame(time) {
-        this.props.tick();
+    componentWillMount() {
+        this.clearInterval = this.startLoop(this.props.tick, this.props.delay);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.shouldStop) {
+            this.clearInterval();
+        }
+    }
+
+    componentWillUnmount() {
+        this.clearInterval();
     }
 
     render() {
         return this.props.children;
     }
-}
 
-export default withAnimationFrame(Loop, 75);
+    startLoop = (updaterFunc, millis = 300) => {
+        const intervalId = setInterval(updaterFunc, millis);
+
+        return () => clearInterval(intervalId);
+    };
+}

@@ -9,6 +9,7 @@ export default class GameLogic {
             //Food wasn't touched yet!
             return {
                 ...currentState,
+                gameOver: snakeState.gameOver,
                 snake: {
                     ...currentState.snake,
                     head: snakeState.snake.head,
@@ -19,6 +20,7 @@ export default class GameLogic {
             //Food was touched, merge is achieved different
             return {
                 ...currentState,
+                gameOver: snakeState.gameOver,
                 food: foodState.food,
                 snake: {
                     ...currentState.snake,
@@ -55,7 +57,10 @@ export default class GameLogic {
         const newHead = GameLogic._recomputeHead(currentState);
         const newTail = GameLogic._recomputeTail(currentState);
 
+        const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
+
         return {
+            gameOver: !!isHeadInTail,
             snake: {
                 head: newHead,
                 tail: newTail

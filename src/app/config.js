@@ -13,6 +13,7 @@ export default {
         RIGHT: 39
     },
     InitialState: {
+        gameOver: false,
         score: 0,
         snake: {
             head: {
