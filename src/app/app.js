@@ -1,19 +1,21 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+import HashRouter from 'react-router-dom/HashRouter';
+import Provider from 'react-redux/lib/components/Provider';
 
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
-import SnakeGame from './screen/SnakeGame/index';
+import SnakeGame from './screen/Game/index';
 import Splash from './screen/Splash/index';
 
-import store from './redux/store';
+import createStore from './redux/store';
 
 export default () =>
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-        <Provider store={store()}>
+        <Provider store={createStore()}>
             <HashRouter>
                 <Switch>
                     <Route path="/" component={Splash} exact />

@@ -11,27 +11,5 @@ export default {
         DOWN: 40,
         LEFT: 37,
         RIGHT: 39
-    },
-    InitialState: {
-        gameOver: false,
-        score: 0,
-        snake: {
-            head: {
-                x: 0,
-                y: 0
-            },
-            tail: [],
-            tailLength: 0,
-            direction: {
-                x: 1,
-                y: 0
-            }
-        },
-        food: {
-            position: {
-                x: 10,
-                y: 10
-            }
-        }
     }
 };

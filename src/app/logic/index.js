@@ -1,37 +1,6 @@
 import Config from '../config';
 
 export default class GameLogic {
-    static update(currentState) {
-        const foodState = GameLogic._updateFood(currentState);
-        const snakeState = GameLogic._updateSnake(currentState);
-
-        if (foodState === currentState) {
-            //Food wasn't touched yet!
-            return {
-                ...currentState,
-                gameOver: snakeState.gameOver,
-                snake: {
-                    ...currentState.snake,
-                    head: snakeState.snake.head,
-                    tail: snakeState.snake.tail
-                }
-            };
-        } else {
-            //Food was touched, merge is achieved different
-            return {
-                ...currentState,
-                gameOver: snakeState.gameOver,
-                food: foodState.food,
-                snake: {
-                    ...currentState.snake,
-                    tailLength: foodState.snake.tailLength,
-                    head: snakeState.snake.head,
-                    tail: foodState.snake.tail
-                }
-            };
-        }
-    }
-
     static _updateFood(currentState) {
         const { food: { position }, snake: { head, tail, tailLength } } = currentState;
 

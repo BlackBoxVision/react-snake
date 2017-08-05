@@ -19,4 +19,4 @@ export default {
             y: 10
         }
     }
-}
+};

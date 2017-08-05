@@ -1,7 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-class GameLoop {
+export default class GameLoop {
     subscribers = [];
     loopID = null;
 
@@ -23,34 +20,4 @@ class GameLoop {
     unsubscribe = callbackName => (this.subscribers = this.subscribers.filter(({ name }) => name !== callbackName));
 
     clearSubscribers = () => (this.subscribers = []);
-}
-
-export default class Loop extends React.Component {
-    static propTypes = {
-        children: PropTypes.any
-    };
-
-    static childContextTypes = {
-        loop: PropTypes.object
-    };
-
-    loop = new GameLoop();
-
-    componentDidMount() {
-        this.loop.start();
-    }
-
-    componentWillUnmount() {
-        this.loop.stop();
-    }
-
-    getChildContext() {
-        return {
-            loop: this.loop
-        };
-    }
-
-    render() {
-        return this.props.children;
-    }
 }

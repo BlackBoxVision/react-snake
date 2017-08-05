@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '../primitives/Box';
+import Box from './Box';
 
 export default class World extends React.PureComponent {
     static propTypes = {
+        width: PropTypes.number,
+        height: PropTypes.number,
         config: PropTypes.shape({
-            width: PropTypes.number,
-            height: PropTypes.number,
             xBlocks: PropTypes.number,
             yBlocks: PropTypes.number,
             background: PropTypes.string
@@ -23,8 +23,8 @@ export default class World extends React.PureComponent {
 
     getChildContext() {
         return {
-            width: this.props.config.width,
-            height: this.props.config.height,
+            width: this.props.width,
+            height: this.props.height,
             xBlocks: this.props.config.xBlocks,
             yBlocks: this.props.config.yBlocks
         };
@@ -33,12 +33,12 @@ export default class World extends React.PureComponent {
     render() {
         return (
             <Box
-                width={this.props.config.width}
-                height={this.props.config.height}
-                color={this.props.config.background}
-                image={this.props.config.image}
-                size={this.props.config.size}
                 position="relative"
+                width={this.props.width}
+                height={this.props.height}
+                size={this.props.config.size}
+                image={this.props.config.image}
+                color={this.props.config.background}
             >
                 {this.props.children}
             </Box>
