@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import SnakeSkin from '../../../../static/images/snake/skin1.jpg';
+import SnakeSkin from '../../../../../static/images/snake/skin1.jpg';
 
-import Box from '../primitives/Box';
+import Box from '../../../../common/primitives/Box';
 import Pixel from '../primitives/Pixel';
 
-import * as SnakeActions from '../../../redux/snake/actions';
-import { headSelector, tailSelector } from '../../../redux/snake/selector';
+import * as SnakeActions from '../../../../redux/snake/actions';
+import { headSelector, tailSelector } from '../../../../redux/snake/selector';
 
 class Snake extends React.Component {
     static propTypes = {

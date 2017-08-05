@@ -6,8 +6,8 @@ import Content from 'material-ui/Card/CardContent';
 
 import AppLogo from '../../../static/images/logo/logo.png';
 
-import Layout from '../../common/Layout';
-import Container from '../../common/Container';
+import Layout from '../../common/primitives/Layout';
+import Container from '../../common/primitives/Container';
 
 import styles from './styles';
 

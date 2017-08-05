@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Box from './Box';
+import Box from '../../../../common/primitives/Box';
 
 export default class World extends React.PureComponent {
     static propTypes = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import EventLoop from '../utils/loop/event';
+import EventLoop from '../../utils/loop/event';
 
 export default class EventListener extends React.Component {
     static propTypes = {

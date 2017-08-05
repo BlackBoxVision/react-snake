@@ -2,16 +2,16 @@ import React from 'react';
 
 import Content from 'material-ui/Card/CardContent';
 
-import Layout from '../../common/Layout';
+import Layout from '../../common/primitives/Layout';
 
-import Loop from './primitives/Loop';
-import Stage from './primitives/Stage';
+import Loop from './components/primitives/Loop';
+import Stage from './components/primitives/Stage';
 
-import Snake from './entities/Snake';
-import Apple from './entities/Apple';
+import Snake from './components/entities/Snake';
+import Apple from './components/entities/Apple';
 
-import GameOver from '../../common/GameOver';
-import EventProvider from '../../common/EventProvider';
+import GameOverDialog from './components/GameOver';
+import EventProvider from '../../common/provider/Event';
 
 import stage from '../../utils/config';
 
@@ -20,7 +20,7 @@ export default class Game extends React.Component {
         return (
             <EventProvider>
                 <Layout>
-                    <GameOver />
+                    <GameOverDialog />
                     <Content>
                         <Loop>
                             <Stage height={stage.height} width={stage.width} config={stage}>

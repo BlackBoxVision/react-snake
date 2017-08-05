@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Card from 'material-ui/Card/Card';
 
 import Flex from './Flex';

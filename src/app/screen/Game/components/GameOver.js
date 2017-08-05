@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import connect from 'react-redux/lib/connect/connect';
 
-import Dialog, {DialogActions, DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog';
 import Button from 'material-ui/Button/Button';
 
-import Box from '../screen/Game/primitives/Box';
+import Dialog from 'material-ui/Dialog';
+import DialogTitle from 'material-ui/Dialog/DialogTitle';
+import DialogActions from 'material-ui/Dialog/DialogActions';
+import DialogContent from 'material-ui/Dialog/DialogContent';
+import DialogContentText from 'material-ui/Dialog/DialogContentText';
 
-import { gameOverSelector } from '../redux/game/selector';
+import Box from '../../../common/primitives/Box';
+
+import { gameOverSelector } from '../../../redux/game/selector';
 
 class GameOver extends React.Component {
     static propTypes = {
@@ -16,7 +21,6 @@ class GameOver extends React.Component {
     };
 
     static contextTypes = {
-        loop: PropTypes.object,
         eventLoop: PropTypes.object
     };
 

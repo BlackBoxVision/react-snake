@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 
 import Pixel from '../primitives/Pixel';
 
-import * as AppleActions from '../../../redux/apple/actions';
-import { positionSelector } from '../../../redux/apple/selector';
+import * as AppleActions from '../../../../redux/apple/actions';
+import { positionSelector } from '../../../../redux/apple/selector';
 
 class Apple extends React.Component {
     static propTypes = {
