@@ -1,30 +1,17 @@
 import Config from '../config';
 
 export default class GameLogic {
-    static _updateFood(currentState) {
-        const { food: { position }, snake: { head, tail, tailLength } } = currentState;
-
-        if (position.x === head.x && position.y === head.y) {
-            const newTail = [head, ...tail];
-            const newTailLength = tailLength + 1;
-            const newPosition = GameLogic._recomputeFood(currentState);
-
-            return {
-                food: {
-                    position: newPosition
-                },
-                snake: {
-                    tail: newTail,
-                    tailLength: newTailLength
-                }
-            };
-        }
-        return currentState;
+    static snakeEatsApple(snake, apple) {
+        return snake.head.x === apple.position.x && snake.head.y === apple.position.y
     }
 
-    static updateSnake(currentState) {
-        const newHead = GameLogic._recomputeHead(currentState);
-        const newTail = GameLogic._recomputeTail(currentState);
+    static snakeEatsItSelf = (head, tail) => (newX, newY) => {
+        return tail.filter(({ x, y }) => x === newX && y === newY).length > 0 || (head.x === newX && head.y === newY);
+    };
+
+    static updateSnake(snake) {
+        const newHead = GameLogic._recomputeHead(snake);
+        const newTail = GameLogic._recomputeTail(snake);
 
         const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
 
@@ -34,11 +21,8 @@ export default class GameLogic {
         };
     }
 
-    static _recomputeFood(currentState) {
-        const { snake: { head, tail } } = currentState;
-
-        const hasCollisions = (newX, newY) =>
-            tail.filter(({ x, y }) => x === newX && y === newY).length > 0 || (head.x === newX && head.y === newY);
+    static updateApple(snake) {
+        const hasCollisions = GameLogic.snakeEatsItSelf(snake.head, snake.tail);
 
         let newX;
         let newY;
@@ -54,9 +38,7 @@ export default class GameLogic {
         };
     }
 
-    static _recomputeHead(currentState) {
-        const { head, direction } = currentState;
-
+    static _recomputeHead({ head, direction }) {
         let newX = head.x + direction.x;
         let newY = head.y + direction.y;
 
@@ -72,9 +54,7 @@ export default class GameLogic {
         };
     }
 
-    static _recomputeTail(currentState) {
-        const { head, tail } = currentState;
-
+    static _recomputeTail({ head, tail }) {
         return tail.map((item, index) => (index === 0 ? head : tail[index - 1]));
     }
 }

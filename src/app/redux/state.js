@@ -12,7 +12,7 @@ export default {
             y: 0
         }
     },
-    food: {
+    apple: {
         lastTime: 0,
         position: {
             x: 10,

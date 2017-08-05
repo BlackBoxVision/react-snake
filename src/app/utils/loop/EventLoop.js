@@ -27,7 +27,7 @@ export default class EventLoop {
         this.subscribers[name] = [].concat(callback);
     };
 
-    unsubscribe = callbackName => this.subscribers[callbackName] = [];
+    unsubscribe = callbackName => (this.subscribers[callbackName] = []);
 
     clearSubscribers = () => (this.subscribers = {});
 }

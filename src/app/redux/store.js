@@ -5,12 +5,12 @@ import resetMiddleware from 'redux-reset';
 import loggerMiddleware from 'redux-logger';
 
 import snakeReducer from './snake/reducer';
-import foodReducer from './food/reducer';
+import appleReducer from './apple/reducer';
 
 export default () => {
     const reducers = combineReducers({
         snake: snakeReducer,
-        food: foodReducer
+        apple: appleReducer
     });
 
     if (process.env.NODE_ENV === 'development') {

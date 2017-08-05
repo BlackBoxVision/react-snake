@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Pixel from '../primitives/Pixel';
+
+import * as AppleActions from '../../../redux/apple/actions';
 
 class Apple extends React.Component {
     static propTypes = {
@@ -12,6 +15,9 @@ class Apple extends React.Component {
                 x: PropTypes.number.isRequired,
                 y: PropTypes.number.isRequired
             })
+        }),
+        actions: PropTypes.shape({
+            update: PropTypes.func.isRequired
         })
     };
 
@@ -31,16 +37,15 @@ class Apple extends React.Component {
         return <Pixel zIndex={10} color="#F44336" position={this.props.state.position} />;
     }
 
-    update = currentTime => {
-        if (currentTime && currentTime - this.props.state.lastTime > 100) {
-            //this.setState(currentState => GameLogic._recomputeFood(currentState));
-            //this.lastTime = currentTime;
-        }
-    };
+    update = currentTime => this.props.actions.update(currentTime);
 }
 
 const mapStateToProps = state => ({
-    state: state.food
+    state: state.apple
 });
 
-export default connect(mapStateToProps)(Apple);
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(AppleActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Apple);
