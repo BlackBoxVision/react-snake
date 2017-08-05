@@ -4,10 +4,10 @@ import Link from 'react-router-dom/Link';
 import Button from 'material-ui/Button';
 import Content from 'material-ui/Card/CardContent';
 
+import AppLogo from '../../../static/images/logo/logo.png';
+
 import Layout from '../../common/Layout';
 import Container from '../../common/Container';
-
-import AppLogo from '../../../static/images/logo/logo.png';
 
 import styles from './styles';
 
