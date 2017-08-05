@@ -1,17 +1,17 @@
 import Stage from '../utils/stage-config';
 
 export default class GameLogic {
-    static snakeEatsApple(snake, apple) {
-        return snake.head.x === apple.position.x && snake.head.y === apple.position.y;
+    static snakeEatsApple(head, position) {
+        return head.x === position.x && head.y === position.y;
     }
 
     static snakeEatsItSelf = (head, tail) => (newX, newY) => {
         return tail.filter(({ x, y }) => x === newX && y === newY).length > 0 || (head.x === newX && head.y === newY);
     };
 
-    static updateSnake(snake) {
-        const newHead = GameLogic._recomputeHead(snake);
-        const newTail = GameLogic._recomputeTail(snake);
+    static updateSnake(head, tail, direction) {
+        const newHead = GameLogic._recomputeHead(head, direction);
+        const newTail = GameLogic._recomputeTail(head, tail);
 
         //const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
 
@@ -21,8 +21,8 @@ export default class GameLogic {
         };
     }
 
-    static updateApple(snake) {
-        const hasCollisions = GameLogic.snakeEatsItSelf(snake.head, snake.tail);
+    static updateApple(head, tail) {
+        const hasCollisions = GameLogic.snakeEatsItSelf(head, tail);
 
         let newX;
         let newY;
@@ -38,7 +38,7 @@ export default class GameLogic {
         };
     }
 
-    static _recomputeHead({ head, direction }) {
+    static _recomputeHead(head, direction) {
         let newX = head.x + direction.x;
         let newY = head.y + direction.y;
 
@@ -54,7 +54,7 @@ export default class GameLogic {
         };
     }
 
-    static _recomputeTail({ head, tail }) {
+    static _recomputeTail(head, tail) {
         return tail.map((item, index) => (index === 0 ? head : tail[index - 1]));
     }
 }

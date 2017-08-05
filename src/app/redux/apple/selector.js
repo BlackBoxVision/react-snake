@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
 
-const selector = state => state.apple;
+const takePosition = state => state.apple.position;
 
-export const appleSelector = createSelector(selector, apple => apple);
+export const positionSelector = createSelector(takePosition, position => position);

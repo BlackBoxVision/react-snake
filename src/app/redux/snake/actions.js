@@ -48,21 +48,20 @@ export const increaseTailLength = newTailLength => ({
 export const update = currentTime => {
     return (dispatch, getState) => {
         if (currentTime) {
-            const { snake, apple } = getState();
+            const { snake: { head, tail, direction, lastTime, tailLength }, apple: { position } } = getState();
 
-            if (currentTime - snake.lastTime > 100) {
-                const { head, tail } = GameLogic.updateSnake(snake);
+            if (currentTime - lastTime > 100) {
+                const newSnake = GameLogic.updateSnake(head, tail, direction);
 
-                if (GameLogic.snakeEatsApple(snake, apple)) {
-                    const { x, y } = GameLogic.updateApple(snake);
-                    const length = snake.tailLength;
+                if (GameLogic.snakeEatsApple(head, position)) {
+                    const newApplePosition = GameLogic.updateApple(head, tail);
 
-                    dispatch(updatePositionFrom(head, [head, ...tail]));
-                    dispatch(increaseTailLength(length + 1));
+                    dispatch(updatePositionFrom(newSnake.head, [newSnake.head, ...newSnake.tail]));
+                    dispatch(increaseTailLength(tailLength + 1));
 
-                    dispatch(AppleActions.updatePosition(x, y));
+                    dispatch(AppleActions.updatePosition(newApplePosition.x, newApplePosition.y));
                 } else {
-                    dispatch(updatePositionFrom(head, tail));
+                    dispatch(updatePositionFrom(newSnake.head, newSnake.tail));
                 }
 
                 dispatch(saveCurrentTime(currentTime));

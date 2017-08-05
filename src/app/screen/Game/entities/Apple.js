@@ -6,16 +6,13 @@ import { bindActionCreators } from 'redux';
 import Pixel from '../primitives/Pixel';
 
 import * as AppleActions from '../../../redux/apple/actions';
-import { appleSelector } from '../../../redux/apple/selector';
+import { positionSelector } from '../../../redux/apple/selector';
 
 class Apple extends React.Component {
     static propTypes = {
-        state: PropTypes.shape({
-            lastTime: PropTypes.number.isRequired,
-            position: PropTypes.shape({
-                x: PropTypes.number.isRequired,
-                y: PropTypes.number.isRequired
-            })
+        position: PropTypes.shape({
+            x: PropTypes.number.isRequired,
+            y: PropTypes.number.isRequired
         }),
         actions: PropTypes.shape({
             update: PropTypes.func.isRequired
@@ -34,15 +31,23 @@ class Apple extends React.Component {
         this.context.loop.unsubscribe('apple');
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.position.x !== nextProps.position.x || this.props.position.y !== nextProps.y) {
+            return true;
+        }
+
+        return false;
+    }
+
     render() {
-        return <Pixel zIndex={10} color="#F44336" position={this.props.state.position} />;
+        return <Pixel zIndex={10} color="#F44336" position={this.props.position} />;
     }
 
     update = currentTime => this.props.actions.update(currentTime);
 }
 
 const mapStateToProps = state => ({
-    state: appleSelector(state)
+    position: positionSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({

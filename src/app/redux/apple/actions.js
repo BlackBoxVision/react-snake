@@ -21,9 +21,9 @@ export const saveCurrentTime = newTime => ({
 export const update = currentTime => {
     return (dispatch, getState) => {
         if (currentTime) {
-            const { apple } = getState();
+            const { apple: { lastTime } } = getState();
 
-            if (currentTime - apple.lastTime > 100) {
+            if (currentTime - lastTime > 100) {
                 dispatch(saveCurrentTime(currentTime));
             }
         }
