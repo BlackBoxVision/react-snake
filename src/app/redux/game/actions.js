@@ -10,7 +10,7 @@ export const increaseLength = newLength => ({
 });
 
 export const increaseScore = newScore => ({
-    type: INCREASE_LENGTH,
+    type: INCREASE_SCORE,
     payload: {
         score: newScore
     }

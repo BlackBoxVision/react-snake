@@ -1,8 +1,7 @@
 export default {
     button: {
         height: 50,
-        width: '100%',
-        backgroundColor: '#69F0AE'
+        width: '100%'
     },
     img: {
         paddingTop: 50,

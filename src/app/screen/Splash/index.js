@@ -6,6 +6,7 @@ import Content from 'material-ui/Card/CardContent';
 
 import AppLogo from '../../../static/images/logo/logo.png';
 
+import Text from '../../common/primitives/Text';
 import Layout from '../../common/primitives/Layout';
 import Container from '../../common/primitives/Container';
 
@@ -20,29 +21,29 @@ export default class Splash extends React.Component {
                     <Container margin="75px" padding="10px 0px 0px 0px">
                         <Container margin="10px 0px 0px 0px">
                             <Link to="/game" style={styles.link}>
-                                <Button raised style={styles.button}>
-                                    PLAY
+                                <Button color="accent" raised style={styles.button}>
+                                    <Text i18nKey="splash.play" />
                                 </Button>
                             </Link>
                         </Container>
                         <Container margin="10px 0px 0px 0px">
                             <Link to="/" style={styles.link}>
-                                <Button raised style={styles.button}>
-                                    INSTRUCTIONS
+                                <Button color="accent" raised style={styles.button}>
+                                    <Text i18nKey="splash.instructions" />
                                 </Button>
                             </Link>
                         </Container>
                         <Container margin="10px 0px 0px 0px">
                             <Link to="/" style={styles.link}>
-                                <Button raised style={styles.button}>
-                                    HIGH SCORE
+                                <Button color="accent" raised style={styles.button}>
+                                    <Text i18nKey="splash.score" />
                                 </Button>
                             </Link>
                         </Container>
                         <Container margin="10px 0px 0px 0px">
                             <Link to="/" style={styles.link}>
-                                <Button raised style={styles.button}>
-                                    RATE
+                                <Button color="accent" raised style={styles.button}>
+                                    <Text i18nKey="splash.rate" />
                                 </Button>
                             </Link>
                         </Container>

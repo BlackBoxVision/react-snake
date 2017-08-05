@@ -11,12 +11,13 @@ import DialogContent from 'material-ui/Dialog/DialogContent';
 import DialogContentText from 'material-ui/Dialog/DialogContentText';
 
 import Box from '../../../common/primitives/Box';
+import Text from '../../../common/primitives/Text';
 
-import { gameOverSelector } from '../../../redux/game/selector';
+import { gameOverSelector, scoreSelector } from '../../../redux/game/selector';
 
 class GameOver extends React.Component {
     static propTypes = {
-        onRestart: PropTypes.func.isRequired,
+        score: PropTypes.number.isRequired,
         open: PropTypes.bool.isRequired
     };
 
@@ -31,20 +32,24 @@ class GameOver extends React.Component {
     }
 
     render() {
+        const options = {
+            score: this.props.score
+        };
+
         return (
             <Box>
                 <Dialog open={this.props.open}>
                     <DialogTitle>
-                        Game Over
+                        <Text i18nKey="game.over"/>
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Ups, you have loose!
+                            <Text i18nKey="game.score" options={options}/>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.closeDialog} color="primary">
-                            RESTART GAME
+                        <Button color="accent" onClick={this.closeDialog}>
+                            <Text i18nKey="game.retry"/>
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -59,7 +64,8 @@ class GameOver extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    open: gameOverSelector(state)
+    open: gameOverSelector(state),
+    score: scoreSelector(state)
 });
 
 export default connect(mapStateToProps)(GameOver);

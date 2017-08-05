@@ -8,7 +8,7 @@ import appleReducer from './apple/reducer';
 import gameReducer from './game/reducer';
 import snakeReducer from './snake/reducer';
 
-export default () => {
+export function configStore() {
     const reducers = combineReducers({
         apple: appleReducer,
         game: gameReducer,
@@ -21,3 +21,5 @@ export default () => {
 
     return createStore(reducers, compose(applyMiddleware(thunkMiddleware)), resetMiddleware());
 };
+
+export default configStore();
