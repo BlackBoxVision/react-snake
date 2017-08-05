@@ -1,8 +1,10 @@
+const getKeys = obj => Object.keys(obj);
+
 export default class EventLoop {
     subscribers = {};
 
     start = () => {
-        Object.keys(this.subscribers).forEach(eventName => {
+        getKeys(this.subscribers).forEach(eventName => {
             const eventHandlers = this.subscribers[eventName];
 
             window.addEventListener(eventName, event => eventHandlers.forEach(eventHandler => eventHandler(event)));
@@ -10,7 +12,7 @@ export default class EventLoop {
     };
 
     stop = () => {
-        Object.keys(this.subscribers).forEach(eventName => {
+        getKeys(this.subscribers).forEach(eventName => {
             const eventHandlers = this.subscribers[eventName];
 
             window.removeEventListener(eventName, event => eventHandlers.forEach(eventHandler => eventHandler(event)));

@@ -1,4 +1,4 @@
-import GameLogic from '../../logic';
+import GameLogic from '../logic';
 import * as AppleActions from '../apple/actions';
 
 export const UPDATE_POSITION = '@@snake/UPDATE_POSITION';

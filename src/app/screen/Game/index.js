@@ -12,7 +12,7 @@ import EventListener from './primitives/EventListener';
 import Snake from './entities/Snake';
 import Apple from './entities/Apple';
 
-import stage from '../../utils/stage-config';
+import stage from '../../utils/config';
 
 class Game extends React.Component {
     render() {

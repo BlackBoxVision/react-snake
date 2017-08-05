@@ -1,4 +1,4 @@
-import Stage from '../utils/stage-config';
+import Stage from '../utils/config';
 
 export default class GameLogic {
     static snakeEatsApple(head, position) {
