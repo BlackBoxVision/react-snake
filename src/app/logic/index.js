@@ -2,7 +2,7 @@ import Config from '../config';
 
 export default class GameLogic {
     static snakeEatsApple(snake, apple) {
-        return snake.head.x === apple.position.x && snake.head.y === apple.position.y
+        return snake.head.x === apple.position.x && snake.head.y === apple.position.y;
     }
 
     static snakeEatsItSelf = (head, tail) => (newX, newY) => {

@@ -5,9 +5,11 @@ import { bindActionCreators } from 'redux';
 
 import SnakeSkin from '../../../../static/images/snake/skin1.jpg';
 
-import * as SnakeActions from '../../../redux/snake/actions';
 import EventListener from '../primitives/EventListener';
 import Pixel from '../primitives/Pixel';
+
+import * as SnakeActions from '../../../redux/snake/actions';
+import { snakeSelector } from '../../../redux/snake/selector';
 
 class Snake extends React.Component {
     static propTypes = {
@@ -74,7 +76,7 @@ class Snake extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    state: state.snake
+    state: snakeSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({

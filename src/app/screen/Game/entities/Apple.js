@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Pixel from '../primitives/Pixel';
 
 import * as AppleActions from '../../../redux/apple/actions';
+import { appleSelector } from '../../../redux/apple/selector';
 
 class Apple extends React.Component {
     static propTypes = {
@@ -41,7 +42,7 @@ class Apple extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    state: state.apple
+    state: appleSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
