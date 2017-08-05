@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import SnakeSkin from '../../../../static/images/snake/skin1.jpg';
 
+import Box from '../primitives/Box';
 import Pixel from '../primitives/Pixel';
 
 import * as SnakeActions from '../../../redux/snake/actions';
@@ -39,7 +40,11 @@ class Snake extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.head.x !== nextProps.head.x || this.props.head.y !== nextProps.head.y || nextProps.tail.length > 0) {
+        if (
+            this.props.head.x !== nextProps.head.x ||
+            this.props.head.y !== nextProps.head.y ||
+            nextProps.tail.length > 0
+        ) {
             return true;
         }
 
@@ -47,24 +52,28 @@ class Snake extends React.Component {
     }
 
     render() {
-        const { head, tail } = this.props;
-
         return (
-                <div>
-                    <Pixel zIndex={100} color="green" position={head} image={`url(${SnakeSkin})`} size="20px 20px" />
-                    {tail.map(this.renderTail)}
-                </div>
+            <Box>
+                <Pixel
+                    image={`url(${SnakeSkin})`}
+                    position={this.props.head}
+                    size="20px 20px"
+                    color="green"
+                    zIndex={100}
+                />
+                {this.props.tail.map(this.renderTail)}
+            </Box>
         );
     }
 
     renderTail = (position, index) =>
         <Pixel
             key={`snake-tail-${index}`}
-            zIndex={100}
-            color="green"
-            size="20px 20px"
-            position={position}
             image={`url(${SnakeSkin})`}
+            position={position}
+            size="20px 20px"
+            color="green"
+            zIndex={100}
         />;
 
     update = currentTime => this.props.actions.update(currentTime);
