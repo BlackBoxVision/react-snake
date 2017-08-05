@@ -5,7 +5,7 @@
   "version": "0.0.7",
   "dependencies": {
     "gh-pages": "^1.0.0",
-    "material-ui": "^0.18.7",
+    "material-ui": "next",
     "prop-types": "^15.5.10",
     "react": "15.5.3",
     "react-animation-frame": "^0.2.1",

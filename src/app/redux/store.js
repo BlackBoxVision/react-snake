@@ -14,7 +14,7 @@ export default () => {
     });
 
     if (process.env.NODE_ENV === 'development') {
-        return createStore(reducers, compose(applyMiddleware(thunkMiddleware, loggerMiddleware)), resetMiddleware());
+        return createStore(reducers, compose(applyMiddleware(thunkMiddleware)), resetMiddleware());
     }
 
     return createStore(reducers, compose(applyMiddleware(thunkMiddleware)), resetMiddleware());

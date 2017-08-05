@@ -43,7 +43,7 @@ class Snake extends React.Component {
         if (
             this.props.head.x !== nextProps.head.x ||
             this.props.head.y !== nextProps.head.y ||
-            nextProps.tail.length > 0
+            this.props.tail.length !== nextProps.tail.length
         ) {
             return true;
         }

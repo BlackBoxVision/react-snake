@@ -1,70 +1,50 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 
-import CardText from 'material-ui/Card/CardText';
-import RaisedButton from 'material-ui/RaisedButton/RaisedButton';
+import Button from 'material-ui/Button';
 
 import Layout from '../../common/Layout';
 import Container from '../../common/Container';
 
 import AppLogo from '../../../static/images/logo/logo.png';
 
-const styles = {
-    button: {
-        height: 50
-    },
-    img: {
-        paddingTop: 50,
-        paddingLeft: 50,
-        paddingRight: 50
-    }
-};
+import styles from './styles';
 
 export default class Splash extends React.Component {
     render() {
         return (
             <Layout>
                 <img src={AppLogo} alt="game logo" width="85%" style={styles.img} />
-                <CardText>
-                    <Container margin="75px" padding="10px 0px 0px 0px">
-                        <Container margin="10px 0px 0px 0px">
-                            <RaisedButton
-                                containerElement={<Link to="/game" />}
-                                label="PLAY"
-                                backgroundColor="#69F0AE"
-                                style={styles.button}
-                                fullWidth
-                            />
-                        </Container>
-                        <Container margin="10px 0px 0px 0px">
-                            <RaisedButton
-                                containerElement={<Link to="/" />}
-                                label="INSTRUCTIONS"
-                                backgroundColor="#69F0AE"
-                                style={styles.button}
-                                fullWidth
-                            />
-                        </Container>
-                        <Container margin="10px 0px 0px 0px">
-                            <RaisedButton
-                                containerElement={<Link to="/" />}
-                                label="HIGH SCORE"
-                                backgroundColor="#69F0AE"
-                                style={styles.button}
-                                fullWidth
-                            />
-                        </Container>
-                        <Container margin="10px 0px 0px 0px">
-                            <RaisedButton
-                                containerElement={<Link to="/" />}
-                                label="RATE"
-                                backgroundColor="#69F0AE"
-                                style={styles.button}
-                                fullWidth
-                            />
-                        </Container>
+                <Container margin="75px" padding="10px 0px 0px 0px">
+                    <Container margin="10px 0px 0px 0px">
+                        <Link to="/game">
+                            <Button raised style={styles.button}>
+                                PLAY
+                            </Button>
+                        </Link>
                     </Container>
-                </CardText>
+                    <Container margin="10px 0px 0px 0px">
+                        <Link to="/">
+                            <Button raised style={styles.button}>
+                                INSTRUCTIONS
+                            </Button>
+                        </Link>
+                    </Container>
+                    <Container margin="10px 0px 0px 0px">
+                        <Link to="/">
+                            <Button raised style={styles.button}>
+                                HIGH SCORE
+                            </Button>
+                        </Link>
+                    </Container>
+                    <Container margin="10px 0px 0px 0px">
+                        <Link to="/">
+                            <Button raised style={styles.button}>
+                                RATE
+                            </Button>
+                        </Link>
+                    </Container>
+                </Container>
             </Layout>
         );
     }
