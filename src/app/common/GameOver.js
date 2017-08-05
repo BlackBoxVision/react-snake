@@ -1,38 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog/Dialog';
-import FlatButton from 'material-ui/FlatButton/FlatButton';
+import { connect } from 'react-redux';
 
-export default class GameOverDialog extends React.Component {
+import Dialog, {DialogActions, DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog';
+import Button from 'material-ui/Button/Button';
+
+import Box from '../screen/Game/primitives/Box';
+
+import { gameOverSelector } from '../redux/game/selector';
+
+class GameOver extends React.Component {
     static propTypes = {
         onRestart: PropTypes.func.isRequired,
         open: PropTypes.bool.isRequired
     };
 
-    state = {
-        open: this.props.gameOver
+    static contextTypes = {
+        loop: PropTypes.object,
+        eventLoop: PropTypes.object
     };
 
-    render() {
-        const actions = [<FlatButton label="RESTART GAME" onTouchTap={this.closeDialogAndRestartGame} />];
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open) {
+            this.context.eventLoop.stop();
+        }
+    }
 
+    render() {
         return (
-            <Dialog title="Game Over" actions={actions} open={this.props.open}>
-                <p>Ups, you have loose!</p>
-            </Dialog>
+            <Box>
+                <Dialog open={this.props.open}>
+                    <DialogTitle>
+                        Game Over
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Ups, you have loose!
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.closeDialog} color="primary">
+                            RESTART GAME
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </Box>
         );
     }
 
-    closeDialogAndRestartGame = () => {
-        if (this.props.onRestart) {
-            this.props.onRestart();
-        }
-
-        this.closeDialog();
+    closeDialog = () => {
+        this.props.dispatch({ type: 'RESET' });
+        this.context.eventLoop.start();
     };
-
-    closeDialog = () =>
-        this.setState(state => ({
-            open: !state.open
-        }));
 }
+
+const mapStateToProps = state => ({
+    open: gameOverSelector(state)
+});
+
+export default connect(mapStateToProps)(GameOver);

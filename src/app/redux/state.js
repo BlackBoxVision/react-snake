@@ -1,4 +1,9 @@
 export default {
+    game: {
+        length: 0,
+        score: 0,
+        gameOver: false
+    },
     snake: {
         lastTime: 0,
         head: {
@@ -6,7 +11,6 @@ export default {
             y: 0
         },
         tail: [],
-        tailLength: 0,
         direction: {
             x: 1,
             y: 0

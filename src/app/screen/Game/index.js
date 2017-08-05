@@ -1,6 +1,5 @@
 import React from 'react';
 
-import pure from 'recompose/pure';
 import Content from 'material-ui/Card/CardContent';
 
 import Layout from '../../common/Layout';
@@ -11,14 +10,17 @@ import Stage from './primitives/Stage';
 import Snake from './entities/Snake';
 import Apple from './entities/Apple';
 
-import stage from '../../utils/config';
+import GameOver from '../../common/GameOver';
 import EventProvider from '../../common/EventProvider';
 
-class Game extends React.PureComponent {
+import stage from '../../utils/config';
+
+export default class Game extends React.Component {
     render() {
         return (
             <EventProvider>
                 <Layout>
+                    <GameOver />
                     <Content>
                         <Loop>
                             <Stage height={stage.height} width={stage.width} config={stage}>
@@ -32,5 +34,3 @@ class Game extends React.PureComponent {
         );
     }
 }
-
-export default pure(Game);

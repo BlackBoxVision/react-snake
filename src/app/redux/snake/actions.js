@@ -1,10 +1,11 @@
 import GameLogic from '../logic';
+
 import * as AppleActions from '../apple/actions';
+import * as GameActions from '../game/actions';
 
 export const UPDATE_POSITION = '@@snake/UPDATE_POSITION';
 export const CHANGE_DIRECTION = '@@snake/CHANGE_DIRECTION';
 export const SAVE_CURRENT_TIME = '@@snake/SAVE_CURRENT_TIME';
-export const INCREASE_TAIL_LENGTH = '@@snake/INCREASE_TAIL_LENGTH';
 
 const Direction = {
     UP: 38,
@@ -38,33 +39,32 @@ export const saveCurrentTime = newTime => ({
     }
 });
 
-export const increaseTailLength = newTailLength => ({
-    type: INCREASE_TAIL_LENGTH,
-    payload: {
-        tailLength: newTailLength
-    }
-});
-
 export const update = currentTime => {
     return (dispatch, getState) => {
-        if (currentTime) {
-            const { snake: { head, tail, direction, lastTime, tailLength }, apple: { position } } = getState();
+        const { apple: { position }, game: { length, score }, snake: { head, tail, direction, lastTime } } = getState();
 
+        if (currentTime) {
             if (currentTime - lastTime > 100) {
                 const newSnake = GameLogic.updateSnake(head, tail, direction);
 
-                if (GameLogic.snakeEatsApple(head, position)) {
-                    const newApplePosition = GameLogic.updateApple(head, tail);
+                if (!GameLogic.isHeadInTail(newSnake.head, newSnake.tail)) {
+                    if (GameLogic.snakeEatsApple(head, position)) {
+                        const newApplePosition = GameLogic.updateApple(head, tail);
 
-                    dispatch(updatePositionFrom(newSnake.head, [newSnake.head, ...newSnake.tail]));
-                    dispatch(increaseTailLength(tailLength + 1));
+                        dispatch(updatePositionFrom(newSnake.head, [newSnake.head, ...newSnake.tail]));
 
-                    dispatch(AppleActions.updatePosition(newApplePosition.x, newApplePosition.y));
+                        dispatch(GameActions.increaseLength(length + 1));
+                        dispatch(GameActions.increaseScore(score + 1));
+
+                        dispatch(AppleActions.updatePosition(newApplePosition.x, newApplePosition.y));
+                    } else {
+                        dispatch(updatePositionFrom(newSnake.head, newSnake.tail));
+                    }
+
+                    dispatch(saveCurrentTime(currentTime));
                 } else {
-                    dispatch(updatePositionFrom(newSnake.head, newSnake.tail));
+                    dispatch(GameActions.gameOver(true));
                 }
-
-                dispatch(saveCurrentTime(currentTime));
             }
         }
     };

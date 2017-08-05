@@ -9,11 +9,13 @@ export default class GameLogic {
         return tail.filter(({ x, y }) => x === newX && y === newY).length > 0 || (head.x === newX && head.y === newY);
     };
 
+    static isHeadInTail(head, tail) {
+        return !!tail.find(it => it.x === head.x && it.y === head.y);
+    }
+
     static updateSnake(head, tail, direction) {
         const newHead = GameLogic._recomputeHead(head, direction);
         const newTail = GameLogic._recomputeTail(head, tail);
-
-        //const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
 
         return {
             head: newHead,

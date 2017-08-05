@@ -22,12 +22,6 @@ export default (state = State.snake, action) => {
                 lastTime: action.payload.lastTime
             };
 
-        case SnakeActions.INCREASE_TAIL_LENGTH:
-            return {
-                ...state,
-                tailLength: action.payload.tailLength
-            };
-
         default:
             return state;
     }

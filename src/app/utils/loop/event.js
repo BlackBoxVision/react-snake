@@ -2,21 +2,22 @@ const getKeys = obj => Object.keys(obj);
 
 export default class EventLoop {
     subscribers = {};
+    eventHandlers = {};
+
+    getEventHandlerByName = (eventName) => {
+        return event => this.subscribers[eventName].forEach(eventHandler => eventHandler(event));
+    };
 
     start = () => {
         getKeys(this.subscribers).forEach(eventName => {
-            const eventHandlers = this.subscribers[eventName];
+            this.eventHandlers[eventName] = this.getEventHandlerByName(eventName);
 
-            window.addEventListener(eventName, event => eventHandlers.forEach(eventHandler => eventHandler(event)));
+            window.addEventListener(eventName, this.eventHandlers[eventName], true);
         });
     };
 
     stop = () => {
-        getKeys(this.subscribers).forEach(eventName => {
-            const eventHandlers = this.subscribers[eventName];
-
-            window.removeEventListener(eventName, event => eventHandlers.forEach(eventHandler => eventHandler(event)));
-        });
+        getKeys(this.subscribers).forEach(eventName => window.removeEventListener(eventName, this.eventHandlers[eventName], true));
     };
 
     subscribe = (name, callback) => {
