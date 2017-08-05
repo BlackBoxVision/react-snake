@@ -1,5 +1,3 @@
-import GameLogic from '../../logic';
-
 export const UPDATE_POSITION = '@@apple/UPDATE_POSITION';
 export const SAVE_CURRENT_TIME = '@@apple/SAVE_CURRENT_TIME';
 

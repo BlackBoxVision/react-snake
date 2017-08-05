@@ -1,4 +1,4 @@
-import Config from '../config';
+import Stage from '../utils/stage-config';
 
 export default class GameLogic {
     static snakeEatsApple(snake, apple) {
@@ -13,7 +13,7 @@ export default class GameLogic {
         const newHead = GameLogic._recomputeHead(snake);
         const newTail = GameLogic._recomputeTail(snake);
 
-        const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
+        //const isHeadInTail = newTail.find(it => it.x === newHead.x && it.y === newHead.y);
 
         return {
             head: newHead,
@@ -28,8 +28,8 @@ export default class GameLogic {
         let newY;
 
         do {
-            newX = Math.floor(Math.random() * Config.World.xBlocks);
-            newY = Math.floor(Math.random() * Config.World.yBlocks);
+            newX = Math.floor(Math.random() * Stage.xBlocks);
+            newY = Math.floor(Math.random() * Stage.yBlocks);
         } while (hasCollisions(newX, newY));
 
         return {
@@ -42,11 +42,11 @@ export default class GameLogic {
         let newX = head.x + direction.x;
         let newY = head.y + direction.y;
 
-        newX = newX < 0 ? Config.World.xBlocks - 1 : newX;
-        newX = newX > Config.World.xBlocks - 1 ? 0 : newX;
+        newX = newX < 0 ? Stage.xBlocks - 1 : newX;
+        newX = newX > Stage.xBlocks - 1 ? 0 : newX;
 
-        newY = newY < 0 ? Config.World.yBlocks - 1 : newY;
-        newY = newY > Config.World.yBlocks - 1 ? 0 : newY;
+        newY = newY < 0 ? Stage.yBlocks - 1 : newY;
+        newY = newY > Stage.yBlocks - 1 ? 0 : newY;
 
         return {
             x: newX,

@@ -12,7 +12,7 @@ import EventListener from './primitives/EventListener';
 import Snake from './entities/Snake';
 import Apple from './entities/Apple';
 
-import Config from '../../config';
+import stage from '../../utils/stage-config';
 
 class Game extends React.Component {
     render() {
@@ -21,7 +21,7 @@ class Game extends React.Component {
                 <CardText>
                     <EventListener>
                         <Loop>
-                            <Stage height={Config.World.height} width={Config.World.width} config={Config.World}>
+                            <Stage height={stage.height} width={stage.width} config={stage}>
                                 <Snake />
                                 <Apple />
                             </Stage>
