@@ -40,16 +40,16 @@ class GameOver extends React.Component {
             <Box>
                 <Dialog open={this.props.open}>
                     <DialogTitle>
-                        <Text i18nKey="game.over"/>
+                        <Text i18nKey="game.over" />
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            <Text i18nKey="game.score" options={options}/>
+                            <Text i18nKey="game.score" options={options} />
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button color="accent" onClick={this.closeDialog}>
-                            <Text i18nKey="game.retry"/>
+                            <Text i18nKey="game.retry" />
                         </Button>
                     </DialogActions>
                 </Dialog>

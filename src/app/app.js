@@ -15,7 +15,6 @@ import store from './redux/store';
 import theme from './theme';
 import i18n from './i18n';
 
-
 export default () =>
     <MuiThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>

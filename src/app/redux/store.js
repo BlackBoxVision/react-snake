@@ -20,6 +20,6 @@ export function configStore() {
     }
 
     return createStore(reducers, compose(applyMiddleware(thunkMiddleware)), resetMiddleware());
-};
+}
 
 export default configStore();

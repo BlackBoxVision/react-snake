@@ -9,8 +9,8 @@ export default createMuiTheme({
         primary: green,
         accent: {
             ...green,
-            A400: '#69F0AE',
+            A400: '#69F0AE'
         },
-        error: red,
+        error: red
     })
 });

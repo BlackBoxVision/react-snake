@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { translate } from 'react-i18next';
-import Box from "./Box";
+import Box from './Box';
 
 class Text extends React.PureComponent {
     static propTypes = {
