@@ -1,36 +1,24 @@
 import React from 'react';
 
-import Content from 'material-ui/Card/CardContent';
+import Box from '../../common/primitives/Box';
+import * as Responsive from '../../common/primitives/Responsive';
 
-import Layout from '../../common/primitives/Layout';
-
-import Loop from './components/primitives/Loop';
-import Stage from './components/primitives/Stage';
-
-import Snake from './components/entities/Snake';
-import Apple from './components/entities/Apple';
-
-import GameOverDialog from './components/GameOver';
-import EventProvider from '../../common/provider/Event';
-
-import stage from '../../utils/config';
+import GameView from './components/GameView';
 
 export default class Game extends React.Component {
     render() {
         return (
-            <EventProvider>
-                <Layout>
-                    <GameOverDialog />
-                    <Content>
-                        <Loop>
-                            <Stage height={stage.height} width={stage.width} config={stage}>
-                                <Snake />
-                                <Apple />
-                            </Stage>
-                        </Loop>
-                    </Content>
-                </Layout>
-            </EventProvider>
+            <Box>
+                <Responsive.Desktop>
+                    <GameView height="100vh" width="45.5vw"/>
+                </Responsive.Desktop>
+                <Responsive.Tablet>
+                    <GameView height="100vh" width="100vw"/>
+                </Responsive.Tablet>
+                <Responsive.Mobile>
+                    <GameView height="100vh" width="100vw" />
+                </Responsive.Mobile>
+            </Box>
         );
     }
 }
