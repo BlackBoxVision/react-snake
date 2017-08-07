@@ -33,7 +33,7 @@ export default class SplashView extends React.Component {
                     style={styles.img}
                 />
                 <Content>
-                    <Container margin="75px" padding="10px 0px 0px 0px">
+                    <Container margin="30">
                         <HrefButton to="/game" i18nKey="splash.play" />
                         <HrefButton to="/" i18nKey="splash.instructions" />
                         <HrefButton to="/" i18nKey="splash.score" />

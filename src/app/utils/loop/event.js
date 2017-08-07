@@ -4,9 +4,7 @@ export default class EventLoop {
     subscribers = {};
     eventHandlers = {};
 
-    getEventHandlerByName = eventName => {
-        return event => this.subscribers[eventName].forEach(eventHandler => eventHandler(event));
-    };
+    getEventHandlerByName = eventName => event => this.subscribers[eventName].forEach(handler => handler(event));
 
     start = () => {
         getKeys(this.subscribers).forEach(eventName => {
@@ -23,13 +21,7 @@ export default class EventLoop {
     };
 
     subscribe = (name, callback) => {
-        const subscriber = this.subscribers[name];
-
-        if (subscriber) {
-            subscriber.push(callback);
-        }
-
-        this.subscribers[name] = [].concat(callback);
+        this.subscribers[name] = this.subscribers[name] ? this.subscribers[name].concat(callback) : [].concat(callback);
     };
 
     unsubscribe = callbackName => (this.subscribers[callbackName] = []);

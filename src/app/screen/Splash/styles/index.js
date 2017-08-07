@@ -4,9 +4,7 @@ export default {
         width: '100%'
     },
     img: {
-        paddingTop: 50,
-        paddingLeft: 50,
-        paddingRight: 50
+        padding: 50
     },
     link: {
         color: 'white',
