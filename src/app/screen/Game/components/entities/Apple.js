@@ -10,6 +10,7 @@ import * as AppleSelectors from '../../../../redux/apple/selector';
 
 class Apple extends React.Component {
     static propTypes = {
+        name: PropTypes.string.isRequired,
         position: PropTypes.shape({
             x: PropTypes.number.isRequired,
             y: PropTypes.number.isRequired
@@ -19,16 +20,20 @@ class Apple extends React.Component {
         })
     };
 
+    static defaultProps = {
+        name: 'apple'
+    };
+
     static contextTypes = {
         loop: PropTypes.object
     };
 
     componentDidMount() {
-        this.context.loop.subscribe('apple', this.update);
+        this.context.loop.subscribe(this.props.name, this.update);
     }
 
     componentWillUnmount() {
-        this.context.loop.unsubscribe('apple');
+        this.context.loop.unsubscribe(this.props.name);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
