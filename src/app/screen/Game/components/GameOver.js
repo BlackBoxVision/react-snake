@@ -13,7 +13,7 @@ import DialogContentText from 'material-ui/Dialog/DialogContentText';
 import Box from '../../../common/primitives/Box';
 import Text from '../../../common/primitives/Text';
 
-import { gameOverSelector, scoreSelector } from '../../../redux/game/selector';
+import * as GameSelectors from '../../../redux/game/selector';
 
 class GameOver extends React.Component {
     static propTypes = {
@@ -64,8 +64,8 @@ class GameOver extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    open: gameOverSelector(state),
-    score: scoreSelector(state)
+    open: GameSelectors.gameOver(state),
+    score: GameSelectors.score(state)
 });
 
 export default connect(mapStateToProps)(GameOver);

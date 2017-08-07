@@ -9,7 +9,7 @@ import Box from '../../../../common/primitives/Box';
 import Pixel from '../primitives/Pixel';
 
 import * as SnakeActions from '../../../../redux/snake/actions';
-import { headSelector, tailSelector } from '../../../../redux/snake/selector';
+import * as SnakeSelectors from '../../../../redux/snake/selector';
 
 class Snake extends React.Component {
     static propTypes = {
@@ -82,8 +82,8 @@ class Snake extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    head: headSelector(state),
-    tail: tailSelector(state)
+    head: SnakeSelectors.head(state),
+    tail: SnakeSelectors.tail(state)
 });
 
 const mapDispatchToProps = dispatch => ({

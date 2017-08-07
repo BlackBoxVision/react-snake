@@ -25,7 +25,7 @@ export default class Pixel extends React.PureComponent {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.position !== nextProps.position) {
+        if (this.props.position.x !== nextProps.position.x || this.props.position.y !== nextProps.position.y) {
             return true;
         }
 
