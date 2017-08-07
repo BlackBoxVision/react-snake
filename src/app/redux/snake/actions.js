@@ -7,13 +7,6 @@ export const UPDATE_POSITION = '@@snake/UPDATE_POSITION';
 export const CHANGE_DIRECTION = '@@snake/CHANGE_DIRECTION';
 export const SAVE_CURRENT_TIME = '@@snake/SAVE_CURRENT_TIME';
 
-const Direction = {
-    UP: 38,
-    DOWN: 40,
-    LEFT: 37,
-    RIGHT: 39
-};
-
 export const updatePositionFrom = (newHead, newTail) => ({
     type: UPDATE_POSITION,
     payload: {
@@ -70,17 +63,17 @@ export const update = currentTime => {
     };
 };
 
-export const handleKeyUp = char => {
+export const handleKeyUp = (char, direction) => {
     return (dispatch, getState) => {
         switch (char) {
-            case Direction.UP:
-            case Direction.DOWN:
-                dispatch(changeDirectionTo(0, char === Direction.UP ? -1 : 1));
+            case direction.up:
+            case direction.down:
+                dispatch(changeDirectionTo(0, char === direction.up ? -1 : 1));
                 break;
 
-            case Direction.LEFT:
-            case Direction.RIGHT:
-                dispatch(changeDirectionTo(char === Direction.LEFT ? -1 : 1, 0));
+            case direction.left:
+            case direction.right:
+                dispatch(changeDirectionTo(char === direction.left ? -1 : 1, 0));
                 break;
 
             default:

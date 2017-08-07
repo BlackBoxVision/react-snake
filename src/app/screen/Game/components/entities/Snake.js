@@ -13,6 +13,13 @@ import * as SnakeSelectors from '../../../../redux/snake/selector';
 
 class Snake extends React.Component {
     static propTypes = {
+        name: PropTypes.string.isRequired,
+        direction: PropTypes.shape({
+            up: PropTypes.number.isRequired,
+            down: PropTypes.number.isRequired,
+            left: PropTypes.number.isRequired,
+            right: PropTypes.number.isRequired
+        }),
         head: PropTypes.shape({
             x: PropTypes.number.isRequired,
             y: PropTypes.number.isRequired
@@ -24,18 +31,28 @@ class Snake extends React.Component {
         })
     };
 
+    static defaultProps = {
+        name: 'snake',
+        direction: {
+            up: 38,
+            down: 40,
+            left: 37,
+            right: 39
+        }
+    };
+
     static contextTypes = {
         loop: PropTypes.object,
         eventLoop: PropTypes.object
     };
 
     componentDidMount() {
-        this.context.loop.subscribe('snake', this.update);
-        this.context.eventLoop.subscribe('keyup', this.handleKeyUp);
+        this.context.loop.subscribe(this.props.name, this.update);
+        this.context.eventLoop.subscribe('keyup', this.handleKeyUp(this.props.direction));
     }
 
     componentWillUnmount() {
-        this.context.loop.unsubscribe('snake');
+        this.context.loop.unsubscribe(this.props.name);
         this.context.eventLoop.unsubscribe('keyup');
     }
 
@@ -78,7 +95,7 @@ class Snake extends React.Component {
 
     update = currentTime => this.props.actions.update(currentTime);
 
-    handleKeyUp = event => this.props.actions.handleKeyUp(event.which || event.keyCode);
+    handleKeyUp = direction => event => this.props.actions.handleKeyUp(event.which || event.keyCode, direction);
 }
 
 const mapStateToProps = state => ({
