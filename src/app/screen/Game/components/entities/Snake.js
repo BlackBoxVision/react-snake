@@ -57,15 +57,11 @@ class Snake extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (
+        return (
             this.props.head.x !== nextProps.head.x ||
             this.props.head.y !== nextProps.head.y ||
             this.props.tail.length !== nextProps.tail.length
-        ) {
-            return true;
-        }
-
-        return false;
+        );
     }
 
     render() {

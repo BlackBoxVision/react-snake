@@ -37,11 +37,7 @@ class Apple extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.position.x !== nextProps.position.x || this.props.position.y !== nextProps.y) {
-            return true;
-        }
-
-        return false;
+        return (this.props.position.x !== nextProps.position.x || this.props.position.y !== nextProps.y);
     }
 
     render() {
