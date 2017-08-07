@@ -16,7 +16,6 @@ import EventProvider from '../../../common/provider/Event';
 
 import stage from '../../../utils/config';
 
-
 export default class GameView extends React.Component {
     static propTypes = {
         height: PropTypes.string.isRequired,
@@ -38,6 +37,6 @@ export default class GameView extends React.Component {
                     </Content>
                 </Layout>
             </EventProvider>
-        )
+        );
     }
 }

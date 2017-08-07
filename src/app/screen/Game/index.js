@@ -10,10 +10,10 @@ export default class Game extends React.Component {
         return (
             <Box>
                 <Responsive.Desktop>
-                    <GameView height="100vh" width="45.5vw"/>
+                    <GameView height="100vh" width="45.5vw" />
                 </Responsive.Desktop>
                 <Responsive.Tablet>
-                    <GameView height="100vh" width="100vw"/>
+                    <GameView height="100vh" width="100vw" />
                 </Responsive.Tablet>
                 <Responsive.Mobile>
                     <GameView height="100vh" width="100vw" />
