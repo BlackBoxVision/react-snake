@@ -22,12 +22,12 @@ class GameOver extends React.Component {
     };
 
     static contextTypes = {
-        eventLoop: PropTypes.object
+        event: PropTypes.object
     };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.open) {
-            this.context.eventLoop.stop();
+            this.context.event.stop();
         }
     }
 
@@ -59,7 +59,7 @@ class GameOver extends React.Component {
 
     closeDialog = () => {
         this.props.dispatch({ type: 'RESET' });
-        this.context.eventLoop.start();
+        this.context.event.start();
     };
 }
 

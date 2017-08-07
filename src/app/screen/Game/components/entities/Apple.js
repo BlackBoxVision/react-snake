@@ -36,7 +36,7 @@ class Apple extends React.Component {
         this.context.loop.unsubscribe(this.props.name);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps) {
         return (this.props.position.x !== nextProps.position.x || this.props.position.y !== nextProps.y);
     }
 

@@ -43,20 +43,20 @@ class Snake extends React.Component {
 
     static contextTypes = {
         loop: PropTypes.object,
-        eventLoop: PropTypes.object
+        event: PropTypes.object
     };
 
     componentDidMount() {
         this.context.loop.subscribe(this.props.name, this.update);
-        this.context.eventLoop.subscribe('keyup', this.handleKeyUp(this.props.direction));
+        this.context.event.subscribe('keyup', this.handleKeyUp(this.props.direction));
     }
 
     componentWillUnmount() {
         this.context.loop.unsubscribe(this.props.name);
-        this.context.eventLoop.unsubscribe('keyup');
+        this.context.event.unsubscribe('keyup');
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps) {
         return (
             this.props.head.x !== nextProps.head.x ||
             this.props.head.y !== nextProps.head.y ||

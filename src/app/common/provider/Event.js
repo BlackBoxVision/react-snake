@@ -9,22 +9,22 @@ export default class EventListener extends React.Component {
     };
 
     static childContextTypes = {
-        eventLoop: PropTypes.object
+        event: PropTypes.object
     };
 
-    eventLoop = new EventLoop();
+    event = new EventLoop();
 
     componentDidMount() {
-        this.eventLoop.start();
+        this.event.start();
     }
 
     componentWillUnmount() {
-        this.eventLoop.stop();
+        this.event.stop();
     }
 
     getChildContext() {
         return {
-            eventLoop: this.eventLoop
+            event: this.event
         };
     }
 

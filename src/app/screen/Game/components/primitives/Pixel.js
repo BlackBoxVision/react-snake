@@ -24,7 +24,7 @@ export default class Pixel extends React.PureComponent {
         yBlocks: PropTypes.number
     };
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps) {
         return (this.props.position.x !== nextProps.position.x || this.props.position.y !== nextProps.position.y);
     }
 
